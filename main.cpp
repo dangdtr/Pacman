@@ -109,12 +109,13 @@ int main(int argc, char *args[])
 
 	for (int i = 0; i < 4; i++)
 		ghost_list[i]->setClips();
-	ghost_list[0]->setPos(168, 196);
 
+	ghost_list[0]->setPos(168, 196);
+	//setPos tiep
 
 	GameMap *game_map;
 	game_map = new GameMap;
-	game_map->LoadMap("map.txt");
+	//game_map->LoadMap("map.txt");
 	game_map->setClipTile();
 
 	Point *point;
@@ -125,8 +126,10 @@ int main(int argc, char *args[])
 
 	std::cerr << "dao trong dang";
 
+	int score = 0;
 	while (!quit)
 	{
+		SDL_RenderClear(g_screen);
 		while (SDL_PollEvent(&g_event) != 0)
 		{
 			if (g_event.type == SDL_QUIT)
@@ -136,17 +139,14 @@ int main(int argc, char *args[])
 			pacman->HandleInputAction(g_event, g_screen);
 		
 		};
-		SDL_RenderClear(g_screen);
 		g_background.Render(g_screen, NULL);
-		
-		// if (pacman->checkCollisionWithPoint(point->getColliders()) == true){
-		// 	//int n = point->getSPoint() -1;
-		// 	//point->setSPoint(n);
-		// 	std::cerr << point->getSPoint() << std::endl;
-		// }
 
 		point->deletePoint(pacman->getX() + 1, pacman->getY() + 1); 
-		point->setClipTile();
+		//sound
+		//get score
+		score = point->setClipTile();
+		cout << score << endl;
+		
 		point -> Show(g_screen);
 
 		for (int i = 0; i < 4; i++)
@@ -165,7 +165,7 @@ int main(int argc, char *args[])
 
 		SDL_RenderPresent(g_screen);
 
-		SDL_Delay(90);
+		SDL_Delay(130);
 	};
 	//g_background.waitUntilKeyPressed();
 	g_background.Destroy(NULL, g_window, g_screen);

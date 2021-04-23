@@ -80,6 +80,8 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="map.cpp" />
 		<Unit filename="map.h" />
+		<Unit filename="point.cpp" />
+		<Unit filename="point.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

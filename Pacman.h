@@ -25,10 +25,17 @@ public:
 
     void move( std::vector<SDL_Rect>& otherColliders );
 
+    bool leftable(int x_pos, int y_pos);
+    bool rightable(int x_pos, int y_pos);
+    bool downable(int x_pos, int y_pos);
+    bool upable(int x_pos, int y_pos);
+
+
     SDL_Rect upPacman[2];
 	SDL_Rect downPacman[2];
 	SDL_Rect leftPacman[2];
 	SDL_Rect rightPacman[2];
+    SDL_Rect deadPacman[4];
 
     input_ input_type_;
 

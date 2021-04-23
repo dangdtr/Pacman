@@ -9,6 +9,10 @@ Point::Point()
 }
 Point::~Point()
 {
+    for (int i = 0; i < MAX_MAP_X; i++)
+        delete _tile[i];
+    delete _tile;
+    delete game_map;
 }
 
 void Point::setPosMap(){
