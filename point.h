@@ -25,6 +25,8 @@ public:
     void setSPoint(int s_);
     int getSPoint();
     void deletePoint(int x_, int y_);
+
+    bool checkBigPoint(int x_, int y_);
     
     GameMap* game_map;
     Map _map;

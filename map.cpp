@@ -2,7 +2,6 @@
 // #include "CommonFunction.h"
 // #include "BaseObject.h"
 
-//#include <stdafx.h>
 GameMap::GameMap()
 {
 }
@@ -31,6 +30,7 @@ void GameMap::LoadMap(char* path)
         }
     file.close();
 }
+
 
 void GameMap::setClipTile()
 {

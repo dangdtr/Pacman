@@ -2,8 +2,8 @@
 
 Pacman::Pacman()
 {
-    Pacman_x_pos = 476;
-    Pacman_y_pos = 476;
+    Pacman_x_pos = 252; //x9
+    Pacman_y_pos = 420; //x15
 
     stepX = 0;
     stepY = 0;
@@ -48,10 +48,11 @@ void Pacman::Show(SDL_Renderer *des)
     else if (*y < 0)
         *y = SCREEN_HEIGHT;
 
-    //if (this->checkCollisionWithWall(game_map->getColliders()) == false)
-
-    switch (status_)
+    if (this->flag_dead == false)
     {
+
+        switch (status_)
+        {
         case MOVE_UP:
         {
             p_clip = &upPacman[frame_ % 2];
@@ -78,7 +79,21 @@ void Pacman::Show(SDL_Renderer *des)
             p_clip = &leftPacman[frame_ % 2];
             break;
         }
+        }
+        
+        renderTexture(p_object, des, p_rect.x, p_rect.y, PACMAN_SIZE, PACMAN_SIZE);
     }
+    // else{
+    //     for (int i = 0; i < 7; i++){
+    //         p_clip = &deadPacman[i];
+    //         renderTexture(p_object, des, p_rect.x, p_rect.y, PACMAN_SIZE, PACMAN_SIZE);
+
+    //     }
+    // }
+}
+void Pacman::Show(SDL_Renderer *des, int index)
+{
+    p_clip = &deadPacman[index];
     renderTexture(p_object, des, p_rect.x, p_rect.y, PACMAN_SIZE, PACMAN_SIZE);
 }
 
@@ -284,6 +299,15 @@ void Pacman::setClips()
         leftPacman[1].y = 0;
         leftPacman[1].w = width_frame_;
         leftPacman[1].h = hight_frame_;
+
+        deadPacman[0] = {width_frame_ * 0, hight_frame_ * 2, width_frame_, hight_frame_};
+        deadPacman[1] = {width_frame_ * 1, hight_frame_ * 2, width_frame_, hight_frame_};
+        deadPacman[2] = {width_frame_ * 2, hight_frame_ * 2, width_frame_, hight_frame_};
+        deadPacman[3] = {width_frame_ * 3, hight_frame_ * 2, width_frame_, hight_frame_};
+        deadPacman[4] = {width_frame_ * 0, hight_frame_ * 3, width_frame_, hight_frame_};
+        deadPacman[5] = {width_frame_ * 1, hight_frame_ * 3, width_frame_, hight_frame_};
+        deadPacman[6] = {width_frame_ * 2, hight_frame_ * 3, width_frame_, hight_frame_};
+        deadPacman[7] = {width_frame_ * 3, hight_frame_ * 3, width_frame_, hight_frame_};
     }
 }
 bool Pacman::_LoadImg(std::string path, SDL_Renderer *screen)
@@ -298,7 +322,7 @@ bool Pacman::_LoadImg(std::string path, SDL_Renderer *screen)
     return ret;
 }
 
-bool Pacman::checkCollisionWithWall(std::vector<SDL_Rect> &a)
+bool Pacman::checkCollisionWith(std::vector<SDL_Rect> &a)
 {
     int leftA, leftB;
     int rightA, rightB;
@@ -306,9 +330,9 @@ bool Pacman::checkCollisionWithWall(std::vector<SDL_Rect> &a)
     int bottomA, bottomB;
 
     leftB = this->getX();
-    rightB = leftB + PACMAN_SIZE;
+    rightB = leftB + TILE_SIZE;
     topB = this->getY();
-    bottomB = topB + PACMAN_SIZE;
+    bottomB = topB + TILE_SIZE;
 
     for (int Abox = 0; Abox < a.size(); Abox++)
     {
@@ -351,12 +375,38 @@ bool Pacman::checkCollisionWithPoint(std::vector<SDL_Rect> &a) // thừa
     }
     return false;
 }
+bool Pacman::checkCollisionWithEachGhost(SDL_Rect a)
+{
+    int leftA, leftB;
+    int rightA, rightB;
+    int topA, topB;
+    int bottomA, bottomB;
+
+    leftB = this->getX();
+    rightB = leftB + PACMAN_SIZE;
+    topB = this->getY();
+    bottomB = topB + PACMAN_SIZE;
+
+    
+    {
+        leftA = a.x;
+        rightA = a.x + a.w;
+        topA = a.y;
+        bottomA = a.y + a.h;
+
+        if (((bottomA <= topB) || (topA >= bottomB) || (rightA <= leftB) || (leftA >= rightB)) == false)
+        {
+            return true;
+        }
+    }
+    return false;
+}
 
 void Pacman::move(std::vector<SDL_Rect> &otherColliders)
 {
     *x += stepX;
     p_rect.x = *x;
-    if ((*x < 0) || (*x + PACMAN_SIZE > SCREEN_WIDTH) || checkCollisionWithWall(otherColliders))
+    if ((*x < 0) || (*x + PACMAN_SIZE > SCREEN_WIDTH) || checkCollisionWith(otherColliders))
     {
         *x -= stepX;
         p_rect.x = *x;
@@ -365,9 +415,34 @@ void Pacman::move(std::vector<SDL_Rect> &otherColliders)
     *y += stepY;
     p_rect.y = *y;
 
-    if ((*y < 0) || (*y + PACMAN_SIZE > SCREEN_HEIGHT) || checkCollisionWithWall(otherColliders))
+    if ((*y < 0) || (*y + PACMAN_SIZE > SCREEN_HEIGHT) || checkCollisionWith(otherColliders))
     {
         *y -= stepY;
         p_rect.y = *y;
     }
+}
+
+void Pacman::setFlagDead(bool flag_)
+{
+    this->flag_dead = flag_;
+}
+bool Pacman::getFlagDead()
+{
+    return this->flag_dead;
+}
+void Pacman::setPos(int x_pos, int y_pos){
+    *x = x_pos;
+    *y = y_pos;
+
+}
+void Pacman::setSatus(){
+    // stepX = 0;
+    // stepY = 0;
+    // this->status_ = NO_MOVE;
+}
+void Pacman::setFlagEatBigPoint(bool flag_){
+    this->flag_eat_big_point = flag_;
+}
+bool Pacman::getFlagEatBigPoint(){
+    return this->flag_eat_big_point;
 }

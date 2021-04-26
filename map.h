@@ -24,7 +24,6 @@ public:
 
 protected:
     Map game_map;
-    //TileMap tile_map[MAX_TILES];
     std::vector<SDL_Rect> mCollision;
 
 };

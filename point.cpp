@@ -1,6 +1,6 @@
 #include "point.h"
 Point::Point()
-{   
+{
     game_map = new GameMap;
     game_map ->LoadMap("map.txt");
     _tile = new int*[MAX_MAP_Y];
@@ -27,12 +27,13 @@ void Point::setPosMap(){
                 this->_tile[i][j] = c;
                 std::cerr << this->_tile[i][j] << " ";
             }
-            std::cerr << std::endl;     
+            std::cerr << std::endl;
         }
     file.close();
 }
 void Point::Show(SDL_Renderer *des)
-{
+{   
+    //this->_tile[9][5] == 4;
     for (int i = 0; i < MAX_MAP_Y; i++)
     {
         for (int j = 0; j < MAX_MAP_X; j++)
@@ -41,10 +42,26 @@ void Point::Show(SDL_Renderer *des)
             {
                 p_rect.x = j * TILE_SIZE;
                 p_rect.y = i * TILE_SIZE;
-                renderTexture(p_object, des, p_rect.x + 3, p_rect.y + 2, POINT_SIZE, POINT_SIZE);
+                renderTexture(p_object, des, p_rect.x + 4, p_rect.y + 4, POINT_SIZE, POINT_SIZE);
             }
+            else if (this->_tile[i][j] == 4) {
+                p_rect.x = j * TILE_SIZE;
+                p_rect.y = i * TILE_SIZE;
+                renderTexture(p_object, des, p_rect.x-14 , p_rect.y -14  , TILE_SIZE*2, TILE_SIZE*2);
+            }
+            // else if (this->_tile[i][j] == 4){
+            //     p_rect.x = j * TILE_SIZE;
+            //     p_rect.y = i * TILE_SIZE;
+            //     renderTexture(p_object, des, p_rect.x + 1, p_rect.y + 1, POINT_SIZE + 3, POINT_SIZE + 3);
+            // }
         }
     }
+    // p_rect.x = 3 * TILE_SIZE;
+    // p_rect.y = 9 * TILE_SIZE;
+    // renderTexture(p_object, des, p_rect.x + 0, p_rect.y + 0, POINT_SIZE + 50, POINT_SIZE + 50);
+            
+    
+
     // int ran_x = rand() % MAX_MAP_X, ran_y = rand() % MAX_MAP_Y;
     // renderTexture(p_object, des, ran_x * TILE_SIZE + 2, ran_y * TILE_SIZE + 2, POINT_SIZE + 6, POINT_SIZE + 6);
 }
@@ -74,6 +91,10 @@ int Point::setClipTile()
                 score++;
                 mCollision[count] = {0,0,0,0};
             }
+            if ( this->_tile[i][j] == 5 ){
+                score += 4;
+                mCollision[count] = {0,0,0,0};
+            }
         }
     }
     return score;
@@ -86,5 +107,17 @@ int Point::getSPoint(){
 }
 
 void Point::deletePoint(int x_, int y_){
+    if (this->_tile[y_ / TILE_SIZE][x_ / TILE_SIZE] == 0){
     this->_tile[y_ / TILE_SIZE][x_ / TILE_SIZE] = 3;
+    }else if (this->_tile[y_ / TILE_SIZE][x_ / TILE_SIZE] == 4 ){
+        this->_tile[y_ / TILE_SIZE][x_ / TILE_SIZE] = 5;
+    }
+}
+
+bool Point::checkBigPoint(int x_, int y_){
+    if (this->_tile[y_ / TILE_SIZE][x_ / TILE_SIZE] == 4){ //|| 
+        //this->_tile[(y_ + TILE_SIZE - 1) / TILE_SIZE][(x_ + TILE_SIZE - 1) / TILE_SIZE] == 4 ){
+        return true;
+    }
+    return false;
 }

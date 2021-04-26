@@ -11,10 +11,12 @@ public:
     Pacman();
     ~Pacman();
     void Show(SDL_Renderer* des);
+    void Show(SDL_Renderer* des, int index);
+
     void HandleInputAction(SDL_Event events, SDL_Renderer* screen);
-    bool checkCollisionWithWall( std::vector<SDL_Rect>& a);
+    bool checkCollisionWith( std::vector<SDL_Rect>& a);
     bool checkCollisionWithPoint( std::vector<SDL_Rect>& a);// không cần thiết
-    bool checkCollisionWithGhost( SDL_Rect& a);
+    bool checkCollisionWithEachGhost(SDL_Rect a);
 
     bool _LoadImg(std::string path, SDL_Renderer* screen);
 
@@ -22,6 +24,8 @@ public:
     int getY();
 
     void setClips();
+    void setPos(int x_pos, int y_pos);
+    void setSatus();
 
     void move( std::vector<SDL_Rect>& otherColliders );
 
@@ -35,7 +39,7 @@ public:
 	SDL_Rect downPacman[2];
 	SDL_Rect leftPacman[2];
 	SDL_Rect rightPacman[2];
-    SDL_Rect deadPacman[4];
+    SDL_Rect deadPacman[8];
 
     input_ input_type_;
 
@@ -43,14 +47,23 @@ public:
     int status_ = -1;
 
     GameMap* game_map;
-    
 
-protected: 
+    void setFlagDead(bool flag_);
+    bool getFlagDead();
+
+    void setFlagEatBigPoint(bool flag_);
+    bool getFlagEatBigPoint();
+
+protected:
     int Pacman_x_pos;
     int Pacman_y_pos;
     int stepX ;
     int stepY ;
     int step ;
+
+    bool flag_dead = false;
+    bool flag_eat_big_point = false;
+
 
     int *x = NULL;
     int *y = NULL;
