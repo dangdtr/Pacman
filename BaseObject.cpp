@@ -84,6 +84,7 @@ void BaseObject::Render(SDL_Renderer *des, const SDL_Rect *clip /* = NULL */)
     SDL_Rect renderquad = {p_rect.x, p_rect.y, p_rect.w, p_rect.h};
 
     SDL_RenderCopy(des, p_object, clip, &renderquad);
+    //SDL_RenderPresent(des);
 }
 
 void BaseObject::renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y)
@@ -113,17 +114,17 @@ void BaseObject::renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y
 
 
 
-void BaseObject::waitUntilKeyPressed() // ok
-{
-    SDL_Event e;
-    while (true)
-    {
-        if (SDL_WaitEvent(&e) != 0 &&
-                (e.type == SDL_KEYDOWN || e.type == SDL_QUIT))
-            return;
-        SDL_Delay(100);
-    }
-}
+// void waitUntilKeyPressed() // ok
+// {
+//     SDL_Event e;
+//     while (true)
+//     {
+//         if (SDL_WaitEvent(&e) != 0 &&
+//                 (e.type == SDL_KEYDOWN || e.type == SDL_QUIT))
+//             return;
+//         SDL_Delay(100);
+//     }
+// }
 
 
 void BaseObject::Free()

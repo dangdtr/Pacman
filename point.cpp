@@ -32,7 +32,7 @@ void Point::setPosMap(){
     file.close();
 }
 void Point::Show(SDL_Renderer *des)
-{   
+{
     //this->_tile[9][5] == 4;
     for (int i = 0; i < MAX_MAP_Y; i++)
     {
@@ -56,17 +56,9 @@ void Point::Show(SDL_Renderer *des)
             // }
         }
     }
-    // p_rect.x = 3 * TILE_SIZE;
-    // p_rect.y = 9 * TILE_SIZE;
-    // renderTexture(p_object, des, p_rect.x + 0, p_rect.y + 0, POINT_SIZE + 50, POINT_SIZE + 50);
-            
-    
-
-    // int ran_x = rand() % MAX_MAP_X, ran_y = rand() % MAX_MAP_Y;
-    // renderTexture(p_object, des, ran_x * TILE_SIZE + 2, ran_y * TILE_SIZE + 2, POINT_SIZE + 6, POINT_SIZE + 6);
 }
 
-bool Point::_LoadImg(std::string path, SDL_Renderer *screen)
+bool Point::_LoadImg(const std::string &path, SDL_Renderer *screen)
 {
 
     bool ret = BaseObject::LoadImg(path, screen);
@@ -84,9 +76,10 @@ int Point::setClipTile()
     int count = 0, score = 0;
     for (int i = 0; i < MAX_MAP_Y; i++){
         for (int j = 0; j < MAX_MAP_X; j++){
-            if ( this->_tile[i][j] == 0){
+            if ( this->_tile[i][j] == 0 ){
                 mCollision[count] = {TILE_SIZE * j + 5, TILE_SIZE * i + 5, POINT_SIZE, POINT_SIZE};
             }
+
             if ( this->_tile[i][j] == 3 ){
                 score++;
                 mCollision[count] = {0,0,0,0};
@@ -99,14 +92,14 @@ int Point::setClipTile()
     }
     return score;
 }
-void Point::setSPoint(int x_){
+void Point::setSPoint(const int &x_){
     this->sPoint = x_;
 }
 int Point::getSPoint(){
     return this->sPoint;
 }
 
-void Point::deletePoint(int x_, int y_){
+void Point::deletePoint(const int &x_, const int &y_){
     if (this->_tile[y_ / TILE_SIZE][x_ / TILE_SIZE] == 0){
     this->_tile[y_ / TILE_SIZE][x_ / TILE_SIZE] = 3;
     }else if (this->_tile[y_ / TILE_SIZE][x_ / TILE_SIZE] == 4 ){
@@ -114,9 +107,9 @@ void Point::deletePoint(int x_, int y_){
     }
 }
 
-bool Point::checkBigPoint(int x_, int y_){
-    if (this->_tile[y_ / TILE_SIZE][x_ / TILE_SIZE] == 4){ //|| 
-        //this->_tile[(y_ + TILE_SIZE - 1) / TILE_SIZE][(x_ + TILE_SIZE - 1) / TILE_SIZE] == 4 ){
+bool Point::checkBigPoint(const int &x_, const int &y_){
+    if (this->_tile[y_ / TILE_SIZE][x_ / TILE_SIZE] == 4 || //||
+        this->_tile[(y_ + TILE_SIZE/2 - 1) / TILE_SIZE][(x_ + TILE_SIZE/2 - 1) / TILE_SIZE] == 4 ){
         return true;
     }
     return false;

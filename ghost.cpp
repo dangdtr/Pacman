@@ -7,6 +7,9 @@ Ghost::Ghost()
     //waifu = false;
     x = &Ghost_x_pos;
     y = &Ghost_y_pos;
+    step = STEP;
+    flag_when_pac_eat_big = false;
+    flag_pac_eat_weak_ghost = false;
 }
 
 Ghost::~Ghost()
@@ -22,13 +25,7 @@ int Ghost::getY()
 {
     return *y;
 }
-void Ghost::setFlagWhenPacEatBig(bool flag_)
-{
-    this->flag_when_pac_eat_big = flag_;
-}
-bool Ghost::setFlagWhenPacEatBig(){
-    return this->flag_when_pac_eat_big;
-}
+
 
 void Ghost::Show(SDL_Renderer *des)
 {
@@ -37,14 +34,13 @@ void Ghost::Show(SDL_Renderer *des)
         frame_++;
     }
 
-    if (*x > SCREEN_WIDTH)
-        *x = 0; // - width_frame_;
-    else if (*y > SCREEN_HEIGHT)
-        *y = 0; // - hight_frame_;
-    else if (*x < 0)
-        *x = SCREEN_WIDTH;
-    else if (*y < 0)
-        *y = SCREEN_HEIGHT;
+    if (*x < 0){
+        *x = SCREEN_WIDTH - TILE_SIZE;
+    }
+    
+    if (*x + GHOST_SIZE > SCREEN_WIDTH){
+        *x = 0;
+    }
 
     //alive
     if (flag_when_pac_eat_big == false)
@@ -74,6 +70,7 @@ void Ghost::Show(SDL_Renderer *des)
         break;
         }
         renderTexture(p_object, des, p_rect.x, p_rect.y, GHOST_SIZE, GHOST_SIZE);
+        //SDL_RenderPresent(des);
     }
     else if (flag_when_pac_eat_big == true && flag_pac_eat_weak_ghost == false)
     {
@@ -263,7 +260,8 @@ void Ghost::Action()
     }
 }
 
-bool Ghost::leftable(int x_pos, int y_pos)
+
+bool Ghost::leftable(const int &x_pos, const int &y_pos)
 {
     if (g_tile[(y_pos + 1) / TILE_SIZE][(x_pos - 1) / 28] == 1 ||
         g_tile[(y_pos + TILE_SIZE - 1) / TILE_SIZE][(x_pos - 1) / 28] == 1)
@@ -272,7 +270,7 @@ bool Ghost::leftable(int x_pos, int y_pos)
     }
     return true;
 }
-bool Ghost::rightable(int x_pos, int y_pos)
+bool Ghost::rightable(const int &x_pos, const int &y_pos)
 {
     if (g_tile[(y_pos + 1) / TILE_SIZE][(x_pos + TILE_SIZE + 1) / 28] == 1 ||
         g_tile[(y_pos + TILE_SIZE - 1) / TILE_SIZE][(x_pos + TILE_SIZE + 1) / 28] == 1)
@@ -281,7 +279,7 @@ bool Ghost::rightable(int x_pos, int y_pos)
     }
     return true;
 }
-bool Ghost::downable(int x_pos, int y_pos)
+bool Ghost::downable(const int &x_pos, const int &y_pos)
 {
     if (g_tile[(y_pos + TILE_SIZE + 1) / TILE_SIZE][(x_pos + 1) / 28] == 1 ||
         g_tile[(y_pos + TILE_SIZE + 1) / TILE_SIZE][(x_pos + TILE_SIZE - 1) / 28] == 1)
@@ -290,7 +288,7 @@ bool Ghost::downable(int x_pos, int y_pos)
     }
     return true;
 }
-bool Ghost::upable(int x_pos, int y_pos)
+bool Ghost::upable(const int &x_pos, const int &y_pos)
 {
     if (g_tile[(y_pos - 1) / TILE_SIZE][(x_pos + 1) / 28] == 1 ||
         g_tile[(y_pos - 1) / TILE_SIZE][(x_pos + TILE_SIZE - 1) / 28] == 1)
@@ -299,8 +297,7 @@ bool Ghost::upable(int x_pos, int y_pos)
     }
     return true;
 }
-
-bool Ghost::_LoadImg(std::string path, SDL_Renderer *screen)
+bool Ghost::_LoadImg(const std::string &path, SDL_Renderer *screen)
 {
 
     bool ret = BaseObject::LoadImg(path, screen);
@@ -373,7 +370,7 @@ void Ghost::move(std::vector<SDL_Rect> &otherColliders)
     }
 }
 
-void Ghost::setPos(int x_, int y_)
+void Ghost::setPos(const int &x_, const int &y_)
 {
     *x = x_;
     *y = y_;
@@ -384,10 +381,28 @@ SDL_Rect Ghost::getRect(){
     return this->p_rect;
 }
 
-void Ghost::setFlagEatWeakGhost(bool flag_){
+void Ghost::setFlagEatWeakGhost(const bool &flag_){
     this->flag_pac_eat_weak_ghost = flag_;
 }
 
-bool Ghost::setFlagEatWeakGhost(){
+bool Ghost::getFlagEatWeakGhost(){
     return this->flag_pac_eat_weak_ghost;
+}
+void Ghost::setSTEPWhenDead(){
+    if (this->step == STEP){
+        step = STEP/2;
+    }
+}
+void Ghost::setSTEPWhenALive(){
+    if (this->step != STEP){
+        step = STEP;
+    }
+}
+
+void Ghost::setFlagWhenPacEatBig(const bool &flag_)
+{
+    this->flag_when_pac_eat_big = flag_;
+}
+bool Ghost::getFlagWhenPacEatBig(){
+    return this->flag_when_pac_eat_big;
 }

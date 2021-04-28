@@ -1,5 +1,5 @@
-#ifndef COMMONFUNCTION_H_INCLUDED
-#define COMMONFUNCTION_H_INCLUDED
+#ifndef COMMONFUNCTION_H_
+#define COMMONFUNCTION_H_
 
 #include <windows.h>
 #include <string>
@@ -46,7 +46,7 @@ typedef struct input_{
 #define TILE_SIZE 28
 #define MAX_MAP_X 19
 #define MAX_MAP_Y 19
-#define MAX_TILES 2 // so luong anh tile
+// #define MAX_TILES 2 // so luong anh tile
 
 typedef struct Map{
     int tile[MAX_MAP_Y][MAX_MAP_X];
@@ -75,4 +75,4 @@ const int g_tile[19][19] = {
 };
 
 
-#endif // COMMONFUNCTION_H_INCLUDED
+#endif // COMMONFUNCTION_H_

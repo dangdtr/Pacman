@@ -80,6 +80,8 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="map.cpp" />
 		<Unit filename="map.h" />
+		<Unit filename="menu_game.cpp" />
+		<Unit filename="menu_game.h" />
 		<Unit filename="point.cpp" />
 		<Unit filename="point.h" />
 		<Extensions />

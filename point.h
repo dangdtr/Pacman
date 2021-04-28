@@ -14,7 +14,7 @@ public:
     //void HandleInputAction(SDL_Event events, SDL_Renderer* screen);
     //bool checkCollision( std:: vector<SDL_Rect>& a);
 
-    bool _LoadImg(std::string path, SDL_Renderer* screen);
+    bool _LoadImg(const std::string &path, SDL_Renderer* screen);
     void setPosMap();// load from txt
 
     int setClipTile(); // reurn số point mà pacman ăn đc
@@ -22,11 +22,11 @@ public:
 
     int getX();
     int getY();
-    void setSPoint(int s_);
+    void setSPoint(const int& s_);
     int getSPoint();
-    void deletePoint(int x_, int y_);
+    void deletePoint(const int &x_, const int &y_);
 
-    bool checkBigPoint(int x_, int y_);
+    bool checkBigPoint(const int &x_, const int &y_);
     
     GameMap* game_map;
     Map _map;

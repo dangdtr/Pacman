@@ -11,29 +11,39 @@ public:
     Pacman();
     ~Pacman();
     void Show(SDL_Renderer* des);
-    void Show(SDL_Renderer* des, int index);
+    void Show(SDL_Renderer* des, const int &index);
+    void ShowHealth(SDL_Renderer *des);
 
     void HandleInputAction(SDL_Event events, SDL_Renderer* screen);
     bool checkCollisionWith( std::vector<SDL_Rect>& a);
-    bool checkCollisionWithPoint( std::vector<SDL_Rect>& a);// không cần thiết
+    //bool checkCollisionWithPoint( std::vector<SDL_Rect>& a);// không cần thiết
     bool checkCollisionWithEachGhost(SDL_Rect a);
 
-    bool _LoadImg(std::string path, SDL_Renderer* screen);
+    bool _LoadImg(const std::string& path, SDL_Renderer* screen);
 
     int getX();
     int getY();
 
     void setClips();
-    void setPos(int x_pos, int y_pos);
-    void setSatus();
+    void setPos(const int &x_pos, const int &y_pos);
 
     void move( std::vector<SDL_Rect>& otherColliders );
 
-    bool leftable(int x_pos, int y_pos);
-    bool rightable(int x_pos, int y_pos);
-    bool downable(int x_pos, int y_pos);
-    bool upable(int x_pos, int y_pos);
+    bool leftable(const int &x_pos, const int &y_pos);
+    bool rightable(const int &x_pos, const int &y_pos);
+    bool downable(const int &x_pos, const int &y_pos);
+    bool upable(const int &x_pos, const int &y_pos);
 
+    bool IsGameOver(int &score_);
+
+    void setFlagDead(const bool &flag_);
+    bool getFlagDead();
+
+    void setFlagEatBigPoint(const bool &flag_);
+    bool getFlagEatBigPoint();
+    
+    void setHealth(const int &health_);
+    int getHealth();
 
     SDL_Rect upPacman[2];
 	SDL_Rect downPacman[2];
@@ -42,17 +52,7 @@ public:
     SDL_Rect deadPacman[8];
 
     input_ input_type_;
-
-    int frame_ = 0;
-    int status_ = -1;
-
     GameMap* game_map;
-
-    void setFlagDead(bool flag_);
-    bool getFlagDead();
-
-    void setFlagEatBigPoint(bool flag_);
-    bool getFlagEatBigPoint();
 
 protected:
     int Pacman_x_pos;
@@ -61,9 +61,13 @@ protected:
     int stepY ;
     int step ;
 
-    bool flag_dead = false;
-    bool flag_eat_big_point = false;
+    bool flag_dead ;
+    bool flag_eat_big_point ;
+    int health;
+    bool is_game_over;
 
+    int frame_ = 0;
+    int status_ = -1;
 
     int *x = NULL;
     int *y = NULL;

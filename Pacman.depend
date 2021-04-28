@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1619367435 source:c:\users\ddang\documents\ltnc\pacman\main.cpp
+1619599475 source:c:\users\ddang\documents\ltnc\pacman\main.cpp
 	<iostream>
 	"CommonFunction.h"
 	"BaseObject.h"
@@ -7,8 +7,9 @@
 	"ghost.h"
 	"map.h"
 	"point.h"
+	"menu_game.h"
 
-1619320860 c:\users\ddang\documents\ltnc\pacman\commonfunction.h
+1619597560 c:\users\ddang\documents\ltnc\pacman\commonfunction.h
 	<windows.h>
 	<string>
 	<iostream>
@@ -396,13 +397,13 @@
 1619299906 c:\users\ddang\documents\ltnc\pacman\baseobject.h
 	"CommonFunction.h"
 
-1619363417 c:\users\ddang\documents\ltnc\pacman\pacman.h
+1619595836 c:\users\ddang\documents\ltnc\pacman\pacman.h
 	"CommonFunction.h"
 	"BaseObject.h"
 	"map.h"
 	"point.h"
 
-1619362197 c:\users\ddang\documents\ltnc\pacman\ghost.h
+1619595521 c:\users\ddang\documents\ltnc\pacman\ghost.h
 	"CommonFunction.h"
 	"BaseObject.h"
 	<ctime>
@@ -421,16 +422,16 @@
 1617812802 source:c:\users\ddang\documents\ltnc\pacman\commonfunction.cpp
 	"CommonFunction.h"
 
-1619362310 source:c:\users\ddang\documents\ltnc\pacman\ghost.cpp
+1619595794 source:c:\users\ddang\documents\ltnc\pacman\ghost.cpp
 	"ghost.h"
 
-1619359039 source:c:\users\ddang\documents\ltnc\pacman\map.cpp
+1619589849 source:c:\users\ddang\documents\ltnc\pacman\map.cpp
 	"map.h"
 
-1619367601 source:c:\users\ddang\documents\ltnc\pacman\pacman.cpp
+1619599552 source:c:\users\ddang\documents\ltnc\pacman\pacman.cpp
 	"Pacman.h"
 
-1619299896 source:c:\users\ddang\documents\ltnc\pacman\baseobject.cpp
+1619584814 source:c:\users\ddang\documents\ltnc\pacman\baseobject.cpp
 	"BaseObject.h"
 
 1608572791 c:\users\ddang\documents\ltnc\pacman\sdl\sdl2-2.0.14\i686-w64-mingw32\include\sdl2\sdl.h
@@ -807,11 +808,18 @@
 	"begin_code.h"
 	"close_code.h"
 
-1619321653 c:\users\ddang\documents\ltnc\pacman\point.h
+1619595577 c:\users\ddang\documents\ltnc\pacman\point.h
 	"CommonFunction.h"
 	"BaseObject.h"
 	"map.h"
 
-1619360522 source:c:\users\ddang\documents\ltnc\pacman\point.cpp
+1619595635 source:c:\users\ddang\documents\ltnc\pacman\point.cpp
 	"point.h"
+
+1619598858 c:\users\ddang\documents\ltnc\pacman\menu_game.h
+	"CommonFunction.h"
+	"BaseObject.h"
+
+1619599914 source:c:\users\ddang\documents\ltnc\pacman\menu_game.cpp
+	"Menu_game.h"
 

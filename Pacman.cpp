@@ -7,13 +7,18 @@ Pacman::Pacman()
 
     stepX = 0;
     stepY = 0;
-    step = 7 * 2 * 2;
+    step = 7 * 2;
 
     x = &Pacman_x_pos;
     y = &Pacman_y_pos;
 
+    is_game_over = false;
+
     game_map = new GameMap;
     game_map->LoadMap("map.txt");
+    flag_dead = false;
+    flag_eat_big_point = false;
+    health = 3;
 }
 
 Pacman::~Pacman()
@@ -34,19 +39,18 @@ int Pacman::getY()
 
 void Pacman::Show(SDL_Renderer *des)
 {
+    if (*x < 0){
+        *x = SCREEN_WIDTH - TILE_SIZE;
+    }
+
+    if (*x + GHOST_SIZE > SCREEN_WIDTH){
+        *x = 0;
+    }
+
     if (input_type_.up_ == true || input_type_.right_ == true || input_type_.down_ == true || input_type_.left_ == true)
     {
         frame_++;
     }
-
-    if (*x > SCREEN_WIDTH)
-        *x = 0;
-    else if (*y > SCREEN_HEIGHT)
-        *y = 0;
-    else if (*x < 0)
-        *x = SCREEN_WIDTH;
-    else if (*y < 0)
-        *y = SCREEN_HEIGHT;
 
     if (this->flag_dead == false)
     {
@@ -80,24 +84,28 @@ void Pacman::Show(SDL_Renderer *des)
             break;
         }
         }
-        
+
         renderTexture(p_object, des, p_rect.x, p_rect.y, PACMAN_SIZE, PACMAN_SIZE);
     }
-    // else{
-    //     for (int i = 0; i < 7; i++){
-    //         p_clip = &deadPacman[i];
-    //         renderTexture(p_object, des, p_rect.x, p_rect.y, PACMAN_SIZE, PACMAN_SIZE);
 
-    //     }
-    // }
+
+
 }
-void Pacman::Show(SDL_Renderer *des, int index)
+void Pacman::ShowHealth(SDL_Renderer *des){
+    for (int i = 0; i < this->getHealth(); i++){
+        p_clip = &rightPacman[1];
+        SDL_SetRenderDrawColor(des,0,0,0,0);
+        renderTexture(p_object, des, TILE_SIZE/4 + TILE_SIZE/2*3 * i ,TILE_SIZE  * 19 + TILE_SIZE / 4 , PACMAN_SIZE, PACMAN_SIZE);
+        SDL_RenderPresent(des);
+    }
+}
+void Pacman::Show(SDL_Renderer *des, const int &index)
 {
     p_clip = &deadPacman[index];
     renderTexture(p_object, des, p_rect.x, p_rect.y, PACMAN_SIZE, PACMAN_SIZE);
 }
 
-bool Pacman::leftable(int x_pos, int y_pos)
+bool Pacman::leftable(const int &x_pos, const int &y_pos)
 {
     if (g_tile[(y_pos + 1) / TILE_SIZE][(x_pos - 1) / 28] == 1 ||
         g_tile[(y_pos + TILE_SIZE - 1) / TILE_SIZE][(x_pos - 1) / 28] == 1)
@@ -106,7 +114,7 @@ bool Pacman::leftable(int x_pos, int y_pos)
     }
     return true;
 }
-bool Pacman::rightable(int x_pos, int y_pos)
+bool Pacman::rightable(const int &x_pos, const int &y_pos)
 {
     if (g_tile[(y_pos + 1) / TILE_SIZE][(x_pos + TILE_SIZE + 1) / 28] == 1 ||
         g_tile[(y_pos + TILE_SIZE - 1) / TILE_SIZE][(x_pos + TILE_SIZE + 1) / 28] == 1)
@@ -115,7 +123,7 @@ bool Pacman::rightable(int x_pos, int y_pos)
     }
     return true;
 }
-bool Pacman::downable(int x_pos, int y_pos)
+bool Pacman::downable(const int &x_pos, const int &y_pos)
 {
     if (g_tile[(y_pos + TILE_SIZE + 1) / TILE_SIZE][(x_pos + 1) / 28] == 1 ||
         g_tile[(y_pos + TILE_SIZE + 1) / TILE_SIZE][(x_pos + TILE_SIZE - 1) / 28] == 1)
@@ -124,7 +132,7 @@ bool Pacman::downable(int x_pos, int y_pos)
     }
     return true;
 }
-bool Pacman::upable(int x_pos, int y_pos)
+bool Pacman::upable(const int &x_pos, const int &y_pos)
 {
     if (g_tile[(y_pos - 1) / TILE_SIZE][(x_pos + 1) / 28] == 1 ||
         g_tile[(y_pos - 1) / TILE_SIZE][(x_pos + TILE_SIZE - 1) / 28] == 1)
@@ -195,6 +203,7 @@ void Pacman::HandleInputAction(SDL_Event events, SDL_Renderer *screen)
             }
         }
     }
+    
     else if (events.type == SDL_KEYUP && events.key.repeat == 0)
     {
         switch (events.key.keysym.sym)
@@ -310,7 +319,7 @@ void Pacman::setClips()
         deadPacman[7] = {width_frame_ * 3, hight_frame_ * 3, width_frame_, hight_frame_};
     }
 }
-bool Pacman::_LoadImg(std::string path, SDL_Renderer *screen)
+bool Pacman::_LoadImg(const std::string &path, SDL_Renderer *screen)
 {
 
     bool ret = BaseObject::LoadImg(path, screen);
@@ -349,32 +358,7 @@ bool Pacman::checkCollisionWith(std::vector<SDL_Rect> &a)
 
     return false;
 }
-bool Pacman::checkCollisionWithPoint(std::vector<SDL_Rect> &a) // thừa
-{
-    int leftA, leftB;
-    int rightA, rightB;
-    int topA, topB;
-    int bottomA, bottomB;
 
-    leftB = this->getX();
-    rightB = leftB + PACMAN_SIZE;
-    topB = this->getY();
-    bottomB = topB + PACMAN_SIZE;
-
-    for (int Abox = 0; Abox < a.size(); Abox++)
-    {
-        leftA = a[Abox].x;
-        rightA = a[Abox].x + a[Abox].w;
-        topA = a[Abox].y;
-        bottomA = a[Abox].y + a[Abox].h;
-
-        if (((bottomA <= topB) || (topA >= bottomB) || (rightA <= leftB) || (leftA >= rightB)) == false)
-        {
-            return true;
-        }
-    }
-    return false;
-}
 bool Pacman::checkCollisionWithEachGhost(SDL_Rect a)
 {
     int leftA, leftB;
@@ -387,7 +371,7 @@ bool Pacman::checkCollisionWithEachGhost(SDL_Rect a)
     topB = this->getY();
     bottomB = topB + PACMAN_SIZE;
 
-    
+
     {
         leftA = a.x;
         rightA = a.x + a.w;
@@ -406,7 +390,10 @@ void Pacman::move(std::vector<SDL_Rect> &otherColliders)
 {
     *x += stepX;
     p_rect.x = *x;
-    if ((*x < 0) || (*x + PACMAN_SIZE > SCREEN_WIDTH) || checkCollisionWith(otherColliders))
+
+
+
+    if (checkCollisionWith(otherColliders))
     {
         *x -= stepX;
         p_rect.x = *x;
@@ -415,14 +402,15 @@ void Pacman::move(std::vector<SDL_Rect> &otherColliders)
     *y += stepY;
     p_rect.y = *y;
 
-    if ((*y < 0) || (*y + PACMAN_SIZE > SCREEN_HEIGHT) || checkCollisionWith(otherColliders))
+    if ((*y < 0) || (*y + GHOST_SIZE > SCREEN_HEIGHT) || checkCollisionWith(otherColliders))
     {
         *y -= stepY;
         p_rect.y = *y;
     }
+
 }
 
-void Pacman::setFlagDead(bool flag_)
+void Pacman::setFlagDead(const bool &flag_)
 {
     this->flag_dead = flag_;
 }
@@ -430,19 +418,28 @@ bool Pacman::getFlagDead()
 {
     return this->flag_dead;
 }
-void Pacman::setPos(int x_pos, int y_pos){
+void Pacman::setPos(const int &x_pos, const int &y_pos){
     *x = x_pos;
     *y = y_pos;
 
 }
-void Pacman::setSatus(){
-    // stepX = 0;
-    // stepY = 0;
-    // this->status_ = NO_MOVE;
-}
-void Pacman::setFlagEatBigPoint(bool flag_){
+
+void Pacman::setFlagEatBigPoint(const bool &flag_){
     this->flag_eat_big_point = flag_;
 }
 bool Pacman::getFlagEatBigPoint(){
     return this->flag_eat_big_point;
+}
+void Pacman::setHealth(const int &health_){
+    this->health = health_;
+}
+int Pacman::getHealth(){
+    return this->health;
+}
+
+bool Pacman::IsGameOver(int &score_){
+    if (this->getHealth()==0 || score_ == 178){
+        return true;
+    }
+    return false;
 }
