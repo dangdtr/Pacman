@@ -7,7 +7,7 @@ Pacman::Pacman()
 
     stepX = 0;
     stepY = 0;
-    step = 7 * 2;
+    step = 7 * 2 * 2;
 
     x = &Pacman_x_pos;
     y = &Pacman_y_pos;
@@ -20,6 +20,7 @@ Pacman::Pacman()
     flag_eat_big_point = false;
     health = 3;
 }
+
 
 Pacman::~Pacman()
 {
@@ -203,7 +204,7 @@ void Pacman::HandleInputAction(SDL_Event events, SDL_Renderer *screen)
             }
         }
     }
-    
+
     else if (events.type == SDL_KEYUP && events.key.repeat == 0)
     {
         switch (events.key.keysym.sym)
@@ -438,6 +439,8 @@ int Pacman::getHealth(){
 }
 
 bool Pacman::IsGameOver(int &score_){
+
+
     if (this->getHealth()==0 || score_ == 178){
         return true;
     }

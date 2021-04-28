@@ -25,9 +25,9 @@ void Point::setPosMap(){
                 int c;
                 file >> c;
                 this->_tile[i][j] = c;
-                std::cerr << this->_tile[i][j] << " ";
+                //std::cerr << this->_tile[i][j] << " ";
             }
-            std::cerr << std::endl;
+            //std::cerr << std::endl;
         }
     file.close();
 }

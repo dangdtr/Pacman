@@ -28,15 +28,16 @@ int main(int argc, char *args[])
 	bool quit = false;
 	bool start = true;
 
-	MenuGame menu_game;
+	int score_overall = 0;
 
 	while (!quit)
-	{	
+	{
+		MenuGame menu_game;
 		if (start){
-			///menu_game.Menu_game(g_screen, g_window);
+			menu_game.Menu_game(g_screen, g_window);
 		}
 
-		cerr << "dangh";
+		std::cerr << "dangh";
 
 		Pacman *pacman = NULL;
 		pacman = new Pacman;
@@ -114,10 +115,16 @@ int main(int argc, char *args[])
 
 				while (SDL_PollEvent(&g_event) != 0)
 				{
-					// if (g_event.type == SDL_QUIT)
-					// {
-					// 	quit = true;
-					// };
+					if (g_event.type == SDL_QUIT)
+					{
+						quit = true;
+					};
+					if (g_event.type == SDL_KEYDOWN){
+						if (g_event.key.keysym.sym == SDLK_q){
+							menu_game.Menu_game(g_screen, g_window);
+						}
+					}
+					//pacman->IsGameOver(score_eat_point);
 					pacman->HandleInputAction(g_event, g_screen);
 				}
 				g_background.Render(g_screen, NULL);
@@ -158,6 +165,7 @@ int main(int argc, char *args[])
 				score_eat_point = point->setClipTile();
 
 				count_time++;
+				//cerr << score_eat_point << endl;
 
 				// Pacman eat ghost and die
 				if (pacman->checkCollisionWith(rect_ghost_list) == true && pacman->getFlagEatBigPoint() == false && ghost->getFlagWhenPacEatBig() == false && *g_flag_ghost == false && ghost->getFlagEatWeakGhost() == false) // co va cham voi ghost
@@ -202,7 +210,10 @@ int main(int argc, char *args[])
 					pacman->setFlagEatBigPoint(false);
 					after_eat_big = true;
 				}
-
+				if (pacman->IsGameOver(score_eat_point) == true)
+					{
+						break;
+					}
 			} // end of while pacman alive
 
 			// Status of pacman after die
@@ -281,6 +292,7 @@ int main(int argc, char *args[])
 				after_eat_big = true;
 			}
 		}
+		
 		if (pacman->IsGameOver(score_eat_point) == true)
 		{
 			start = true;
@@ -301,7 +313,7 @@ int main(int argc, char *args[])
 	std::cerr << "end game";
 
 	close();
-	SDL_Delay(1000);
+	SDL_Delay(1);
 
 	return 0;
 }
