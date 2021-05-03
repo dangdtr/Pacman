@@ -42,7 +42,9 @@ SDL_Texture *BaseObject::LoadPNG(std::string path, SDL_Renderer *screen)
     SDL_Surface *load_surface = IMG_Load(path.c_str());
     if (load_surface != NULL)
     {
-        SDL_SetColorKey(load_surface, SDL_TRUE, SDL_MapRGB(load_surface->format, pngCOLOR_KEY_R, pngCOLOR_KEY_G, pngCOLOR_KEY_B));
+        //SDL_SetColorKey(load_surface, SDL_TRUE, SDL_MapRGB(load_surface->format, pngCOLOR_KEY_R, pngCOLOR_KEY_G, pngCOLOR_KEY_B));
+        SDL_SetColorKey(load_surface, SDL_TRUE, SDL_MapRGB(load_surface->format, imgCOLOR_KEY_R, imgCOLOR_KEY_G, imgCOLOR_KEY_B));
+
         new_texture = SDL_CreateTextureFromSurface(screen, load_surface);
         if (new_texture != NULL)
         {

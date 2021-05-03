@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1619608412 source:c:\users\ddang\documents\ltnc\pacman\main.cpp
+1619754040 source:c:\users\ddang\documents\ltnc\pacman\main.cpp
 	<iostream>
 	"CommonFunction.h"
 	"BaseObject.h"
@@ -431,7 +431,7 @@
 1619609458 source:c:\users\ddang\documents\ltnc\pacman\pacman.cpp
 	"Pacman.h"
 
-1619584814 source:c:\users\ddang\documents\ltnc\pacman\baseobject.cpp
+1619609721 source:c:\users\ddang\documents\ltnc\pacman\baseobject.cpp
 	"BaseObject.h"
 
 1608572791 c:\users\ddang\documents\ltnc\pacman\sdl\sdl2-2.0.14\i686-w64-mingw32\include\sdl2\sdl.h
@@ -820,6 +820,19 @@
 	"CommonFunction.h"
 	"BaseObject.h"
 
-1619609416 source:c:\users\ddang\documents\ltnc\pacman\menu_game.cpp
+1619752904 source:c:\users\ddang\documents\ltnc\pacman\menu_game.cpp
 	"Menu_game.h"
+
+1619753981 c:\users\ddang\documents\ltnc\pacman\game.h
+	<iostream>
+	"CommonFunction.h"
+	"BaseObject.h"
+	"Pacman.h"
+	"ghost.h"
+	"map.h"
+	"point.h"
+	"menu_game.h"
+
+1619753985 source:c:\users\ddang\documents\ltnc\pacman\game.cpp
+	"game.h"
 

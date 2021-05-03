@@ -15,8 +15,6 @@ void close();
 void close();
 void waitUntilKeyPressed();
 
-
-
 int main(int argc, char *args[])
 {
 	if (init() == false)
@@ -33,7 +31,8 @@ int main(int argc, char *args[])
 	while (!quit)
 	{
 		MenuGame menu_game;
-		if (start){
+		if (start)
+		{
 			menu_game.Menu_game(g_screen, g_window);
 		}
 
@@ -103,7 +102,7 @@ int main(int argc, char *args[])
 
 			if (pacman->getHealth() <= 3 && pacman->getFlagDead() == false && after_eat_big == false)
 			{
-				pacman->setPos(TILE_SIZE * 9, TILE_SIZE * 15);
+				//pacman->setPos(TILE_SIZE * 9, TILE_SIZE * 15);
 				// pacman->setSatus();
 			}
 
@@ -119,14 +118,18 @@ int main(int argc, char *args[])
 					{
 						quit = true;
 					};
-					if (g_event.type == SDL_KEYDOWN){
-						if (g_event.key.keysym.sym == SDLK_q){
+					//if (g_event.type == SDL_KEYDOWN || SDL_WaitEvent(&g_event) != 0){
+					if (g_event.key.keysym.sym == SDLK_p)
+					{
+						//if (SDL_WaitEvent(&g_event) != 0)
+						{
 							menu_game.Menu_game(g_screen, g_window);
 						}
 					}
 					//pacman->IsGameOver(score_eat_point);
 					pacman->HandleInputAction(g_event, g_screen);
 				}
+
 				g_background.Render(g_screen, NULL);
 				point->Show(g_screen);
 				pacman->move(game_map->getColliders());
@@ -165,7 +168,7 @@ int main(int argc, char *args[])
 				score_eat_point = point->setClipTile();
 
 				count_time++;
-				//cerr << score_eat_point << endl;
+				cerr << score_eat_point << endl;
 
 				// Pacman eat ghost and die
 				if (pacman->checkCollisionWith(rect_ghost_list) == true && pacman->getFlagEatBigPoint() == false && ghost->getFlagWhenPacEatBig() == false && *g_flag_ghost == false && ghost->getFlagEatWeakGhost() == false) // co va cham voi ghost
@@ -177,7 +180,7 @@ int main(int argc, char *args[])
 				// Check pacman eat weak ghost ??yes
 				for (int i = 0; i < 4; i++)
 				{
-					if (pacman->checkCollisionWithEachGhost(ghost_list[i]->getRect()) == true && pacman->getFlagEatBigPoint() == true && ghost->getFlagWhenPacEatBig() == true)
+					if (pacman->checkCollisionWithEachGhost(ghost_list[i]->getRect()) == true && pacman->getFlagEatBigPoint() == true && ghost->getFlagWhenPacEatBig() == true && count_time < 50)
 					{
 						flag_ghost[i] = true;
 						*g_flag_ghost = true;
@@ -211,9 +214,9 @@ int main(int argc, char *args[])
 					after_eat_big = true;
 				}
 				if (pacman->IsGameOver(score_eat_point) == true)
-					{
-						break;
-					}
+				{
+					break;
+				}
 			} // end of while pacman alive
 
 			// Status of pacman after die
@@ -235,6 +238,7 @@ int main(int argc, char *args[])
 
 				SDL_RenderPresent(g_screen);
 				SDL_Delay(250);
+				cerr << "deading" << endl;
 			}
 			else if (pacman->getFlagDead() == true && pacman->getFlagEatBigPoint() == false && frame_dead == 8 && ghost->getFlagWhenPacEatBig() == false)
 			{
@@ -247,7 +251,7 @@ int main(int argc, char *args[])
 			}
 
 			// do: Pacman eat weakGhost
-			if (pacman->getFlagDead() == false && pacman->getFlagEatBigPoint() == true && ghost->getFlagEatWeakGhost() == true && count_time < 100)
+			if (pacman->getFlagDead() == false && pacman->getFlagEatBigPoint() == true && ghost->getFlagEatWeakGhost() == true && count_time < 50)
 			{ // quit == false
 
 				score_eat_point += 4;
@@ -255,6 +259,7 @@ int main(int argc, char *args[])
 				g_background.Render(g_screen, NULL);
 				pacman->ShowHealth(g_screen);
 				point->Show(g_screen);
+				pacman->Show(g_screen);
 
 				// dung while tai day de render shost ve chinh giua
 				for (int i = 0; i < 4; i++)
@@ -263,18 +268,39 @@ int main(int argc, char *args[])
 					{
 						ghost_list[i]->Action();
 						ghost_list[i]->setPos(TILE_SIZE * 9, TILE_SIZE * 7);
+						ghost_list[i]->setFlagWhenPacEatBig(false);
+						ghost_list[i]->setFlagEatWeakGhost(false);
 						// tim duonng ve chinh giua, viet ham khac
 					}
 					ghost_list[i]->Show(g_screen);
 				}
 				//
 
-				pacman->Show(g_screen);
-
 				// chuyen rendere vao trong while
 				SDL_RenderPresent(g_screen);
-				SDL_Delay(130);
+				//SDL_Delay(120);
 
+				// for (int i = 0; i < 4; i++)
+				// {
+				// 	if (flag_ghost[i] == true)
+				// 	{
+				// 		flag_ghost[i] = false;
+				// 	}
+				// 	*g_flag_ghost = false;
+				// 	ghost_list[i]->setFlagWhenPacEatBig(false);
+				// 	ghost_list[i]->setFlagEatWeakGhost(false);
+				// }
+
+				// ghost->setFlagEatWeakGhost(false);
+				// ghost->setFlagWhenPacEatBig(false);
+				// pacman->setFlagEatBigPoint(false);
+				// after_eat_big = true;
+			}
+			else
+				// Check pacman eat weak ghost ??no
+				if (pacman->getFlagDead() == false && pacman->getFlagEatBigPoint() == true && ghost->getFlagEatWeakGhost() == true && count_time == 50)
+			{
+				// Time of weakghost
 				for (int i = 0; i < 4; i++)
 				{
 					if (flag_ghost[i] == true)
@@ -292,7 +318,7 @@ int main(int argc, char *args[])
 				after_eat_big = true;
 			}
 		}
-		
+
 		if (pacman->IsGameOver(score_eat_point) == true)
 		{
 			start = true;
@@ -305,7 +331,9 @@ int main(int argc, char *args[])
 			delete g_flag_ghost;
 			delete game_map;
 			delete point;
-		}else {
+		}
+		else
+		{
 			//start = false;
 		}
 	}
@@ -317,7 +345,6 @@ int main(int argc, char *args[])
 
 	return 0;
 }
-
 
 bool loadBackground()
 {
@@ -394,6 +421,6 @@ void waitUntilKeyPressed() // ok
 		if (SDL_WaitEvent(&e) != 0 &&
 			(e.type == SDL_KEYDOWN || e.type == SDL_QUIT))
 			return;
-		SDL_Delay(100);
+		//SDL_Delay(100);
 	}
 }

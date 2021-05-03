@@ -14,7 +14,7 @@ MenuGame::~MenuGame()
 void MenuGame::Menu_game(SDL_Renderer *ren, SDL_Window *window)
 {
     SDL_Texture *menu_screen = LoadPNG("image/menu_game.png", ren);
-    
+
     SDL_Texture *help_screen = LoadPNG("image/help_game.png", ren);
 
 
@@ -28,7 +28,7 @@ void MenuGame::Menu_game(SDL_Renderer *ren, SDL_Window *window)
     while (playing)
     {
 
-        SDL_Delay(10);
+        SDL_Delay(100);
 
         SDL_RenderPresent(ren);
 
@@ -48,23 +48,31 @@ void MenuGame::Menu_game(SDL_Renderer *ren, SDL_Window *window)
             switch (m_event.key.keysym.sym){
                 case SDLK_SPACE:
                     playing = false;
-                    break;
+                    continue;
                 case SDLK_q:
                     BaseObject::Destroy(menu_screen, window, ren);
                     playing = false;
+                    //continue;
                     break;
                 case SDLK_h:
                     SDL_RenderClear(ren);
                     SDL_SetRenderDrawColor(ren,0,0,0,0);
-        
-                    renderTexture(help_screen, ren, 0, 0);
-                    break;                   
 
-            }   
+                    renderTexture(help_screen, ren, 0, 0);
+                    //continue;
+                    break;
+                case SDLK_m:
+                    SDL_RenderClear(ren);
+                    //SDL_SetRenderDrawColor(ren,0,0,0,0);
+                    renderTexture(menu_screen, ren, 0, 0);
+                    SDL_RenderPresent(ren);
+                    //continue;
+                    break;
+            }
         }
     }
     SDL_DestroyTexture(menu_screen);
-    SDL_DestroyTexture(menu_screen);
+    SDL_DestroyTexture(help_screen);
 
 
 }
