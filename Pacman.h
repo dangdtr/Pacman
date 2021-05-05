@@ -71,6 +71,9 @@ protected:
 
     int *x = NULL;
     int *y = NULL;
+
+    Mix_Music *g_death = Mix_LoadMUS("sound/pacman_death.wav");
+
 };
 
 #endif // Pacman_H_INCLUDED

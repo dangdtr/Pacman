@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1620183493 source:c:\users\ddang\documents\ltnc\pacman\main.cpp
+1620207577 source:c:\users\ddang\documents\ltnc\pacman\main.cpp
 	<iostream>
 	"CommonFunction.h"
 	"BaseObject.h"
@@ -399,13 +399,13 @@
 1619299906 c:\users\ddang\documents\ltnc\pacman\baseobject.h
 	"CommonFunction.h"
 
-1619595836 c:\users\ddang\documents\ltnc\pacman\pacman.h
+1620204439 c:\users\ddang\documents\ltnc\pacman\pacman.h
 	"CommonFunction.h"
 	"BaseObject.h"
 	"map.h"
 	"point.h"
 
-1620183141 c:\users\ddang\documents\ltnc\pacman\ghost.h
+1620204213 c:\users\ddang\documents\ltnc\pacman\ghost.h
 	"CommonFunction.h"
 	"BaseObject.h"
 	<ctime>
@@ -424,13 +424,13 @@
 1617812802 source:c:\users\ddang\documents\ltnc\pacman\commonfunction.cpp
 	"CommonFunction.h"
 
-1619595794 source:c:\users\ddang\documents\ltnc\pacman\ghost.cpp
+1620204209 source:c:\users\ddang\documents\ltnc\pacman\ghost.cpp
 	"ghost.h"
 
 1620147764 source:c:\users\ddang\documents\ltnc\pacman\map.cpp
 	"map.h"
 
-1620183035 source:c:\users\ddang\documents\ltnc\pacman\pacman.cpp
+1620204628 source:c:\users\ddang\documents\ltnc\pacman\pacman.cpp
 	"Pacman.h"
 
 1619609721 source:c:\users\ddang\documents\ltnc\pacman\baseobject.cpp
@@ -810,22 +810,23 @@
 	"begin_code.h"
 	"close_code.h"
 
-1620184954 c:\users\ddang\documents\ltnc\pacman\point.h
+1620203813 c:\users\ddang\documents\ltnc\pacman\point.h
 	"CommonFunction.h"
 	"BaseObject.h"
 	"map.h"
 
-1620185428 source:c:\users\ddang\documents\ltnc\pacman\point.cpp
+1620203864 source:c:\users\ddang\documents\ltnc\pacman\point.cpp
 	"point.h"
 
-1619598858 c:\users\ddang\documents\ltnc\pacman\menu_game.h
+1620207639 c:\users\ddang\documents\ltnc\pacman\menu_game.h
 	"CommonFunction.h"
 	"BaseObject.h"
+	"algorithm"
 
-1620152766 source:c:\users\ddang\documents\ltnc\pacman\menu_game.cpp
+1620207717 source:c:\users\ddang\documents\ltnc\pacman\menu_game.cpp
 	"Menu_game.h"
 
-1619753981 c:\users\ddang\documents\ltnc\pacman\game.h
+1620188040 c:\users\ddang\documents\ltnc\pacman\game.h
 	<iostream>
 	"CommonFunction.h"
 	"BaseObject.h"
@@ -834,8 +835,9 @@
 	"map.h"
 	"point.h"
 	"menu_game.h"
+	"TextObject.h"
 
-1619753985 source:c:\users\ddang\documents\ltnc\pacman\game.cpp
+1620188189 source:c:\users\ddang\documents\ltnc\pacman\game.cpp
 	"game.h"
 
 1620149196 c:\users\ddang\documents\ltnc\pacman\textobject.h

@@ -102,6 +102,14 @@ void Pacman::ShowHealth(SDL_Renderer *des){
 }
 void Pacman::Show(SDL_Renderer *des, const int &index)
 {
+    if (index == 1){
+        Mix_PlayMusic( g_death, -1 );
+    }else if (index < 7){
+        Mix_ResumeMusic();
+    }else if (index == 7){
+        Mix_PauseMusic();
+    }
+
     p_clip = &deadPacman[index];
     renderTexture(p_object, des, p_rect.x, p_rect.y, PACMAN_SIZE, PACMAN_SIZE);
 }

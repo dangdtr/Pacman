@@ -26,7 +26,6 @@ int Ghost::getY()
     return *y;
 }
 
-
 void Ghost::Show(SDL_Renderer *des)
 {
     if (input_type_.up_ == true || input_type_.right_ == true || input_type_.down_ == true || input_type_.left_ == true)
@@ -34,11 +33,13 @@ void Ghost::Show(SDL_Renderer *des)
         frame_++;
     }
 
-    if (*x < 0){
+    if (*x < 0)
+    {
         *x = SCREEN_WIDTH - TILE_SIZE;
     }
-    
-    if (*x + GHOST_SIZE > SCREEN_WIDTH){
+
+    if (*x + GHOST_SIZE > SCREEN_WIDTH)
+    {
         *x = 0;
     }
 
@@ -76,28 +77,30 @@ void Ghost::Show(SDL_Renderer *des)
     {
         switch (status_)
         {
-            case MOVE_UP:
-            {
-                p_clip = &weakGhostBlue[frame_ % 2];
-            }
-            break;
-            case MOVE_DOWN:
-            {
-                p_clip = &weakGhostBlue[frame_ % 2];
-            }
-            break;
-            case MOVE_LEFT:
-            {
-                p_clip = &weakGhostBlue[frame_ % 2];
-            }
-            break;
-            case MOVE_RIGHT:
-            {
-                p_clip = &weakGhostBlue[frame_ % 2];
-            }
+        case MOVE_UP:
+        {
+            p_clip = &weakGhostBlue[frame_ % 2];
+        }
+        break;
+        case MOVE_DOWN:
+        {
+            p_clip = &weakGhostBlue[frame_ % 2];
+        }
+        break;
+        case MOVE_LEFT:
+        {
+            p_clip = &weakGhostBlue[frame_ % 2];
+        }
+        break;
+        case MOVE_RIGHT:
+        {
+            p_clip = &weakGhostBlue[frame_ % 2];
+        }
         }
         renderTexture(p_object, des, p_rect.x, p_rect.y, GHOST_SIZE, GHOST_SIZE);
-    }else if (flag_when_pac_eat_big == true && flag_when_pac_eat_big == true){
+    }
+    else if (flag_when_pac_eat_big == true && flag_when_pac_eat_big == true)
+    {
         switch (status_)
         {
         case MOVE_UP:
@@ -193,8 +196,6 @@ void Ghost::setClips()
         weakGhostBlue[1] = {width_frame_, hight_frame_ * 2, width_frame_, hight_frame_};
         weakGhostWhite[0] = {width_frame_ * 2, hight_frame_ * 2, width_frame_, hight_frame_};
         weakGhostWhite[1] = {width_frame_ * 3, hight_frame_ * 2, width_frame_, hight_frame_};
-
-        
     }
 }
 
@@ -259,7 +260,6 @@ void Ghost::Action()
         }
     }
 }
-
 
 bool Ghost::leftable(const int &x_pos, const int &y_pos)
 {
@@ -376,25 +376,36 @@ void Ghost::setPos(const int &x_, const int &y_)
     *y = y_;
 }
 
-SDL_Rect Ghost::getRect(){
+SDL_Rect Ghost::getRect()
+{
     p_rect = {*x, *y, GHOST_SIZE, GHOST_SIZE};
     return this->p_rect;
 }
 
-void Ghost::setFlagEatWeakGhost(const bool &flag_){
+void Ghost::setFlagEatWeakGhost(const bool &flag_)
+{
     this->flag_pac_eat_weak_ghost = flag_;
-}
-
-bool Ghost::getFlagEatWeakGhost(){
-    return this->flag_pac_eat_weak_ghost;
-}
-void Ghost::setSTEPWhenDead(){
-    if (this->step == STEP){
-        step = STEP/2;
+    if (flag_ == true)
+    {
+        Mix_PlayChannel(-1, g_eat_ghost, 0);
     }
 }
-void Ghost::setSTEPWhenALive(){
-    if (this->step != STEP){
+
+bool Ghost::getFlagEatWeakGhost()
+{
+    return this->flag_pac_eat_weak_ghost;
+}
+void Ghost::setSTEPWhenDead()
+{
+    if (this->step == STEP)
+    {
+        step = STEP / 2;
+    }
+}
+void Ghost::setSTEPWhenALive()
+{
+    if (this->step != STEP)
+    {
         step = STEP;
     }
 }
@@ -403,6 +414,7 @@ void Ghost::setFlagWhenPacEatBig(const bool &flag_)
 {
     this->flag_when_pac_eat_big = flag_;
 }
-bool Ghost::getFlagWhenPacEatBig(){
+bool Ghost::getFlagWhenPacEatBig()
+{
     return this->flag_when_pac_eat_big;
 }

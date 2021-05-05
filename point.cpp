@@ -108,13 +108,12 @@ void Point::deletePoint(const int &x_, const int &y_)
 {
     if (this->_tile[y_ / TILE_SIZE][x_ / TILE_SIZE] == 0)
     {   
-        cerr << "_";
         Mix_PlayChannel(-1,g_chomp,0);
-        cerr << "_" << endl;
         this->_tile[y_ / TILE_SIZE][x_ / TILE_SIZE] = 3;
     }
     else if (this->_tile[y_ / TILE_SIZE][x_ / TILE_SIZE] == 4)
     {
+        Mix_PlayChannel(-1,g_eat_big,0);
         this->_tile[y_ / TILE_SIZE][x_ / TILE_SIZE] = 5;
     }
 }

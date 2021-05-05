@@ -39,6 +39,8 @@ protected:
     int frame = 0;
 
     Mix_Chunk* g_chomp = Mix_LoadWAV("sound/pacman_chomp.wav");
+    Mix_Chunk* g_eat_big = Mix_LoadWAV("sound/pacman_eatfruit.wav");
+
 
 };
 

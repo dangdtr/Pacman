@@ -67,6 +67,8 @@ protected:
 
     int *x = NULL;
     int *y = NULL;
+    Mix_Chunk *g_eat_ghost = Mix_LoadWAV("sound/pacman_eatghost.wav");
+
 }; 
 
 #endif

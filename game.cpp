@@ -1,23 +1,6 @@
-#include <iostream>
-#include "CommonFunction.h"
-#include "BaseObject.h"
-#include "Pacman.h"
-#include "ghost.h"
-#include "map.h"
-#include "point.h"
-#include "menu_game.h"
-#include "TextObject.h"
+#include "game.h"
 
-BaseObject g_background;
-TTF_Font *g_font = NULL;
-
-bool loadBackground();
-bool init();
-void close();
-void close();
-void waitUntilKeyPressed();
-
-int main(int argc, char *args[])
+bool Game::run()
 {
 	if (init() == false)
 		return -1;
@@ -37,7 +20,10 @@ int main(int argc, char *args[])
 		if (start)
 		{
 			menu_game.Menu_game(g_screen, g_window);
+		}else {
+			//Mix_PlayChannel(-1,g_begin,0);
 		}
+        Mix_PlayMusic(g_begin, -1);
 
 		Pacman *pacman = NULL;
 		pacman = new Pacman;
@@ -57,6 +43,8 @@ int main(int argc, char *args[])
 			flag_ghost_was_eaten[i] = new bool;
 			flag_ghost_was_eaten[i] = false;
 		}
+		// bool *g_flag_ghost_was_eaten = new bool;
+		// *g_flag_ghost_was_eaten = false;
 
 		ghost_list[0]->_LoadImg("pic/Blinky.bmp", g_screen);
 		ghost_list[1]->_LoadImg("pic/Inkey.bmp", g_screen);
@@ -82,6 +70,10 @@ int main(int argc, char *args[])
 		point->setPosMap();
 		point->setClipTile();
 
+		std::cerr << "dao trong dang";
+
+		//while()
+
 		int frame_dead = 0;
 		int score_eat_point = 0;
 		int score_eat_ghost = 0;
@@ -89,8 +81,12 @@ int main(int argc, char *args[])
 
 		bool after_eat_big = false;
 
+
+
 		while (!pacman->IsGameOver(score_eat_point) && !quit)
 		{
+
+
 
 			//menu game
 			if (pacman->getHealth() == 0)
@@ -100,18 +96,23 @@ int main(int argc, char *args[])
 			{
 
 				SDL_RenderClear(g_screen);
-				
+
 				while (SDL_PollEvent(&g_event) != 0)
 				{
 					if (g_event.type == SDL_QUIT)
 					{
 						quit = true;
 					};
-					if (g_event.type == SDL_KEYDOWN && g_event.key.keysym.sym == SDLK_ESCAPE)
+					//if (g_event.type == SDL_KEYDOWN || SDL_WaitEvent(&g_event) != 0){
+					if (g_event.key.keysym.sym == SDLK_p)
 					{
-						menu_game.Pause_game(g_screen, g_window);
-						//cerr << "menu pause" << endl;
+						{
+							if (SDL_WaitEvent(&g_event) == 0)
+								menu_game.Menu_game(g_screen, g_window);
+							cerr << "menu pause" << endl;
+						}
 					}
+					//pacman->IsGameOver(score_eat_point);
 					pacman->HandleInputAction(g_event, g_screen);
 				}
 
@@ -121,14 +122,10 @@ int main(int argc, char *args[])
 				pacman->move(game_map->getColliders());
 				pacman->Show(g_screen);
 
-				TextObject text_score("SCORE: \n");
-				TextObject high_score("HIGHT SCORE: ");
+				TextObject text_score("Score: \n");
 				text_score.str_ += std::to_string(score_overall * 10);
-				high_score.str_ += std::to_string(menu_game.get_high_score());
-				high_score.renderTexture(high_score.GetText(22, g_screen), g_screen, TILE_SIZE * 4 - TILE_SIZE / 2, TILE_SIZE * 21 + TILE_SIZE / 4);
 				text_score.renderTexture(text_score.GetText(22, g_screen), g_screen, TILE_SIZE * 7 - TILE_SIZE / 2, TILE_SIZE * 19 + TILE_SIZE / 4);
 				text_score.DestroyText();
-				high_score.DestroyText();
 
 				for (int i = 0; i < 4; i++)
 				{
@@ -155,10 +152,18 @@ int main(int argc, char *args[])
 					count_time = 0;
 				}
 
+				// Pacman eat small point
 				point->deletePoint(pacman->getX() + 1, pacman->getY() + 1);
+				//sound
+				//get score_eat_point
 				score_eat_point = point->setClipTile();
 				score_overall = score_eat_point + score_eat_ghost;
 				count_time++;
+				//cerr << "overall:" << score_overall << endl;
+
+				// Pacman eat ghost and die
+				//
+				// fix lại để pacman ăn chết khi ăn big point sau khi cắn ưaek ghost
 
 				if (pacman->checkCollisionWith(rect_ghost_list) == true && pacman->getFlagEatBigPoint() == false /*&& ghost->getFlagWhenPacEatBig() == false /*&& *g_flag_ghost_was_eaten == false*/ && ghost->getFlagEatWeakGhost() == false) // co va cham voi ghost
 				{
@@ -177,7 +182,7 @@ int main(int argc, char *args[])
 						ghost->setFlagEatWeakGhost(true);
 					}
 				}
-
+				//if (*g_flag_ghost_was_eaten == true)
 				if (ghost->getFlagEatWeakGhost() == true)
 				{
 					break;
@@ -193,6 +198,7 @@ int main(int argc, char *args[])
 						{
 							flag_ghost_was_eaten[i] = false;
 						}
+						//*g_flag_ghost_was_eaten = false;
 						ghost_list[i]->setFlagWhenPacEatBig(false);
 						ghost_list[i]->setFlagEatWeakGhost(false);
 					}
@@ -209,22 +215,13 @@ int main(int argc, char *args[])
 
 			} // end of while pacman alive
 
-			// Pacman death
+			// Status of pacman after die
 			if (pacman->getFlagDead() == true && pacman->getFlagEatBigPoint() == false && frame_dead < 8 && ghost->getFlagWhenPacEatBig() == false)
 			{
 				SDL_RenderClear(g_screen);
 				g_background.Render(g_screen, NULL);
 				pacman->ShowHealth(g_screen);
 				point->Show(g_screen);
-
-				TextObject text_score("SCORE: \n");
-				TextObject high_score("HIGHT SCORE: ");
-				text_score.str_ += std::to_string(score_overall * 10);
-				high_score.str_ += std::to_string(menu_game.get_high_score());
-				high_score.renderTexture(high_score.GetText(22, g_screen), g_screen, TILE_SIZE * 4 - TILE_SIZE / 2, TILE_SIZE * 21 + TILE_SIZE / 4);
-				text_score.renderTexture(text_score.GetText(22, g_screen), g_screen, TILE_SIZE * 7 - TILE_SIZE / 2, TILE_SIZE * 19 + TILE_SIZE / 4);
-				text_score.DestroyText();
-				high_score.DestroyText();
 
 				for (int i = 0; i < 4; i++)
 				{
@@ -237,6 +234,7 @@ int main(int argc, char *args[])
 
 				SDL_RenderPresent(g_screen);
 				SDL_Delay(250);
+				cerr << "deading" << endl;
 			}
 			else if (pacman->getFlagDead() == true && pacman->getFlagEatBigPoint() == false && frame_dead == 8 && ghost->getFlagWhenPacEatBig() == false)
 			{
@@ -253,8 +251,13 @@ int main(int argc, char *args[])
 			{ // quit == false
 
 				score_eat_point += 4;
+				// SDL_RenderClear(g_screen);
+				// g_background.Render(g_screen, NULL);
+				// point->Show(g_screen);
+				// pacman->ShowHealth(g_screen);
+				// pacman->Show(g_screen);
 
-				// tim duong ve chinh giua
+				// dung while tai day de render shost ve chinh giua
 				for (int i = 0; i < 4; i++)
 				{
 					if (flag_ghost_was_eaten[i] == true)
@@ -265,10 +268,16 @@ int main(int argc, char *args[])
 						ghost_list[i]->setPos(TILE_SIZE * 9, TILE_SIZE * 9);
 						ghost_list[i]->setFlagWhenPacEatBig(false);
 						ghost_list[i]->setFlagEatWeakGhost(false);
+						// tim duonng ve chinh giua, viet ham khac
 
 						flag_ghost_was_eaten[i] = false;
 					}
+					//ghost_list[i]->Show(g_screen);
 				}
+				//
+
+				// chuyen rendere vao trong while
+				//SDL_RenderPresent(g_screen);
 			}
 			else
 				// Check pacman eat weak ghost ??no
@@ -281,6 +290,7 @@ int main(int argc, char *args[])
 					{
 						flag_ghost_was_eaten[i] = false;
 					}
+					//*g_flag_ghost_was_eaten = false;
 					ghost_list[i]->setFlagWhenPacEatBig(false);
 					ghost_list[i]->setFlagEatWeakGhost(false);
 				}
@@ -301,6 +311,7 @@ int main(int argc, char *args[])
 			{
 				ghost_list[i] = NULL;
 			}
+			//g_flag_ghost_was_eaten;
 			game_map = NULL;
 			point = NULL;
 		}
@@ -315,15 +326,16 @@ int main(int argc, char *args[])
 	return 0;
 }
 
-bool loadBackground()
+bool Game::loadBackground()
 {
-	bool ret = g_background.BGLoadImg("image/newmap_1.png", g_screen);
+	//bool ret = g_background.BGLoadImg("image_py/level.png", g_screen);
+	bool ret = this->g_background.BGLoadImg("image/newmap_1.png", g_screen);
 	if (ret == false)
 		return false;
 
 	return true;
 }
-bool init()
+bool Game::init()
 {
 	bool success = true;
 
@@ -374,7 +386,7 @@ bool init()
 				success = true;
 				//cerr << "OK";
 			}
-			if (Mix_OpenAudio(/*22050*/ 44100, MIX_DEFAULT_FORMAT, 2, /*4096*/ 2048) == -1)
+			if (Mix_OpenAudio(/*22050*/44100, MIX_DEFAULT_FORMAT, 2, /*4096*/2048) == -1)
 			{
 				success = false;
 				//g_begin = Mix_LoadWAV("sound/pacman_beginning.wav");
@@ -384,7 +396,7 @@ bool init()
 
 	return success;
 }
-void close()
+void Game::close()
 {
 	g_background.Free();
 
@@ -394,17 +406,17 @@ void close()
 	SDL_DestroyWindow(g_window);
 	g_window = NULL;
 
-	TTF_CloseFont(g_font);
-	g_font = NULL;
+    TTF_CloseFont(g_font);
+    g_font = NULL;
 
-	// Mix_FreeMusic(g_begin);
-	// g_begin = NULL;
+    Mix_FreeMusic(g_begin);
+    g_begin = NULL;
 
-	Mix_Quit();
+    Mix_Quit();
 	IMG_Quit();
 	SDL_Quit();
 }
-void waitUntilKeyPressed() // ok
+void Game::waitUntilKeyPressed() // ok
 {
 	SDL_Event e;
 	while (true)
