@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1620209408 source:c:\users\ddang\documents\ltnc\pacman\main.cpp
+1620213425 source:c:\users\ddang\documents\ltnc\pacman\main.cpp
 	<iostream>
 	"CommonFunction.h"
 	"BaseObject.h"
