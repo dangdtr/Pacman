@@ -14,8 +14,6 @@ Pacman::Pacman()
 
     is_game_over = false;
 
-    game_map = new GameMap;
-    game_map->LoadMap("map.txt");
     flag_dead = false;
     flag_eat_big_point = false;
     health = 3;
@@ -26,7 +24,6 @@ Pacman::~Pacman()
 {
     x = NULL;
     y = NULL;
-     game_map = NULL;
 }
 
 int Pacman::getX()
@@ -97,7 +94,6 @@ void Pacman::ShowHealth(SDL_Renderer *des){
         p_clip = &rightPacman[1];
         SDL_SetRenderDrawColor(des,0,0,0,0);
         renderTexture(p_object, des, TILE_SIZE/4 + TILE_SIZE/2*3 * i ,TILE_SIZE  * 19 + TILE_SIZE / 4 , PACMAN_SIZE, PACMAN_SIZE);
-        //SDL_RenderPresent(des);
     }
 }
 void Pacman::Show(SDL_Renderer *des, const int &index)

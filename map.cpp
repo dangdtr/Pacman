@@ -1,6 +1,4 @@
 #include "map.h"
-// #include "CommonFunction.h"
-// #include "BaseObject.h"
 
 GameMap::GameMap()
 {

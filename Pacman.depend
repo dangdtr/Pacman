@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1620207577 source:c:\users\ddang\documents\ltnc\pacman\main.cpp
+1620209408 source:c:\users\ddang\documents\ltnc\pacman\main.cpp
 	<iostream>
 	"CommonFunction.h"
 	"BaseObject.h"
@@ -10,7 +10,7 @@
 	"menu_game.h"
 	"TextObject.h"
 
-1620184841 c:\users\ddang\documents\ltnc\pacman\commonfunction.h
+1620213026 c:\users\ddang\documents\ltnc\pacman\commonfunction.h
 	<windows.h>
 	<string>
 	<iostream>
@@ -399,7 +399,7 @@
 1619299906 c:\users\ddang\documents\ltnc\pacman\baseobject.h
 	"CommonFunction.h"
 
-1620204439 c:\users\ddang\documents\ltnc\pacman\pacman.h
+1620213204 c:\users\ddang\documents\ltnc\pacman\pacman.h
 	"CommonFunction.h"
 	"BaseObject.h"
 	"map.h"
@@ -424,16 +424,16 @@
 1617812802 source:c:\users\ddang\documents\ltnc\pacman\commonfunction.cpp
 	"CommonFunction.h"
 
-1620204209 source:c:\users\ddang\documents\ltnc\pacman\ghost.cpp
+1620213073 source:c:\users\ddang\documents\ltnc\pacman\ghost.cpp
 	"ghost.h"
 
-1620147764 source:c:\users\ddang\documents\ltnc\pacman\map.cpp
+1620213322 source:c:\users\ddang\documents\ltnc\pacman\map.cpp
 	"map.h"
 
-1620204628 source:c:\users\ddang\documents\ltnc\pacman\pacman.cpp
+1620213200 source:c:\users\ddang\documents\ltnc\pacman\pacman.cpp
 	"Pacman.h"
 
-1619609721 source:c:\users\ddang\documents\ltnc\pacman\baseobject.cpp
+1620213011 source:c:\users\ddang\documents\ltnc\pacman\baseobject.cpp
 	"BaseObject.h"
 
 1608572791 c:\users\ddang\documents\ltnc\pacman\sdl\sdl2-2.0.14\i686-w64-mingw32\include\sdl2\sdl.h
@@ -810,12 +810,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1620203813 c:\users\ddang\documents\ltnc\pacman\point.h
+1620213234 c:\users\ddang\documents\ltnc\pacman\point.h
 	"CommonFunction.h"
 	"BaseObject.h"
 	"map.h"
 
-1620203864 source:c:\users\ddang\documents\ltnc\pacman\point.cpp
+1620213221 source:c:\users\ddang\documents\ltnc\pacman\point.cpp
 	"point.h"
 
 1620207639 c:\users\ddang\documents\ltnc\pacman\menu_game.h
@@ -823,7 +823,7 @@
 	"BaseObject.h"
 	"algorithm"
 
-1620207717 source:c:\users\ddang\documents\ltnc\pacman\menu_game.cpp
+1620213151 source:c:\users\ddang\documents\ltnc\pacman\menu_game.cpp
 	"Menu_game.h"
 
 1620188040 c:\users\ddang\documents\ltnc\pacman\game.h

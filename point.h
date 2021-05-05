@@ -11,13 +11,11 @@ public:
     Point();
     ~Point();
     void Show(SDL_Renderer* des);
-    //void HandleInputAction(SDL_Event events, SDL_Renderer* screen);
-    //bool checkCollision( std:: vector<SDL_Rect>& a);
 
     bool _LoadImg(const std::string &path, SDL_Renderer* screen);
-    void setPosMap();// load from txt
+    void setPosMap();
 
-    int setClipTile(); // reurn số point mà pacman ăn đc
+    int setClipTile(); 
     std::vector<SDL_Rect>& getColliders();
 
     int getX();

@@ -26,15 +26,12 @@ void Point::setPosMap()
                 int c;
                 file >> c;
                 this->_tile[i][j] = c;
-                //std::cerr << this->_tile[i][j] << " ";
             }
-            //std::cerr << std::endl;
         }
     file.close();
 }
 void Point::Show(SDL_Renderer *des)
 {
-    //this->_tile[9][5] == 4;
     for (int i = 0; i < MAX_MAP_Y; i++)
     {
         for (int j = 0; j < MAX_MAP_X; j++)

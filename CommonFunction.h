@@ -10,7 +10,7 @@
 #include <vector>
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
-//#include <SDL_ttf.h>
+
 
 using namespace std;
 static SDL_Window* g_window = NULL;
@@ -19,7 +19,7 @@ static SDL_Event g_event;
 
 const int SCREEN_WIDTH = 532 ;
 const int SCREEN_HEIGHT = 532 + 100;
-//const int SCREEN_BPP = 32;
+const int SCREEN_BPP = 32;
 
 const int imgCOLOR_KEY_R = 167;
 const int imgCOLOR_KEY_G = 175;
@@ -31,7 +31,6 @@ const int pngCOLOR_KEY_B = 0;
 const SDL_Color BLUE_COLOR = { 0,255,255};
 
 const int RENDER_DRAW_COLOR = 0xff;
-//const int RENDER_DRAW_COLOR = 0x00;
 
 typedef struct input_{
     int left_;

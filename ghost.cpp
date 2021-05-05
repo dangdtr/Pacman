@@ -3,8 +3,6 @@
 Ghost::Ghost()
 {
     srand((int)time(0));
-    //flag = false;
-    //waifu = false;
     x = &Ghost_x_pos;
     y = &Ghost_y_pos;
     step = STEP;
@@ -311,7 +309,6 @@ bool Ghost::_LoadImg(const std::string &path, SDL_Renderer *screen)
 
 bool Ghost::checkCollision(std::vector<SDL_Rect> &a)
 {
-    //The sides of the rectangles
     int leftA, leftB;
     int rightA, rightB;
     int topA, topB;
@@ -324,10 +321,8 @@ bool Ghost::checkCollision(std::vector<SDL_Rect> &a)
     topB = this->getY();
     bottomB = topB + GHOST_SIZE;
 
-    //Go through the A boxes
     for (int Abox = 0; Abox < a.size(); Abox++)
     {
-        //Calculate the sides of rect A
         leftA = a[Abox].x;
         rightA = a[Abox].x + a[Abox].w;
         topA = a[Abox].y;
@@ -342,31 +337,20 @@ bool Ghost::checkCollision(std::vector<SDL_Rect> &a)
 
 void Ghost::move(std::vector<SDL_Rect> &otherColliders)
 {
-    //Move the dot left or right
     *x += stepX;
-    //shiftColliders();
     p_rect.x = *x;
-    //If the dot collided or went too far to the left or right
     if ((*x < 0) || (*x + GHOST_SIZE > SCREEN_WIDTH) || checkCollision(otherColliders))
     {
-        //Move back
         *x -= stepX;
         p_rect.x = *x;
-        //shiftColliders();
     }
-
-    //Move the dot up or down
     *y += stepY;
     p_rect.y = *y;
-    //shiftColliders();
 
-    //If the dot collided or went too far up or down
     if ((*y < 0) || (*y + GHOST_SIZE > SCREEN_HEIGHT) || checkCollision(otherColliders))
     {
-        //Move back
         *y -= stepY;
         p_rect.y = *y;
-        //shiftColliders();
     }
 }
 

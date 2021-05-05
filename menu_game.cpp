@@ -33,7 +33,6 @@ void MenuGame::Menu_game(SDL_Renderer *ren, SDL_Window *window)
 
         if (SDL_WaitEvent(&m_event) == 0)
         {
-            //SDL_RenderPresent(ren);
             continue;
         }
 
@@ -41,7 +40,6 @@ void MenuGame::Menu_game(SDL_Renderer *ren, SDL_Window *window)
         {
             BaseObject::Destroy(menu_screen, window, ren);
             playing = false;
-            //quit = true;
         };
         if (m_event.type == SDL_KEYDOWN)
         {
@@ -53,22 +51,15 @@ void MenuGame::Menu_game(SDL_Renderer *ren, SDL_Window *window)
             case SDLK_q:
                 BaseObject::Destroy(menu_screen, window, ren);
                 playing = false;
-                //continue;
                 break;
             case SDLK_h:
-                //SDL_RenderClear(ren);
                 SDL_SetRenderDrawColor(ren, 0, 0, 0, 0);
-
                 renderTexture(help_screen, ren, 0, 0);
                 continue;
-                //break;
             case SDLK_m:
-                //SDL_RenderClear(ren);
-                //SDL_SetRenderDrawColor(ren,0,0,0,0);
                 renderTexture(menu_screen, ren, 0, 0);
-                //SDL_RenderPresent(ren);
                 continue;
-                //break;
+
             }
         }
     }
@@ -80,11 +71,8 @@ void MenuGame::Pause_game(SDL_Renderer *ren, SDL_Window *window)
 {
     SDL_Texture *pause_screen = LoadPNG("image/pause_game.png", ren);
 
-    //SDL_SetRenderDrawColor(ren,255,0,0,0);
-
     if (pause_screen == NULL)
     {
-        //cerr << "NULL pause" << endl;
         SDL_DestroyTexture(pause_screen);
     }
 
@@ -96,11 +84,9 @@ void MenuGame::Pause_game(SDL_Renderer *ren, SDL_Window *window)
 
         SDL_Delay(1);
 
-        //cerr << "begin pause \n";
 
         if (SDL_WaitEvent(&m_event) == 0)
         {
-            //SDL_RenderPresent(ren);
             continue;
         }
 
@@ -108,7 +94,6 @@ void MenuGame::Pause_game(SDL_Renderer *ren, SDL_Window *window)
         {
             BaseObject::Destroy(pause_screen, window, ren);
             playing_when_pause = false;
-            //quit = true;
         };
         if (m_event.type == SDL_KEYDOWN)
         {
@@ -120,7 +105,6 @@ void MenuGame::Pause_game(SDL_Renderer *ren, SDL_Window *window)
             case SDLK_q:
                 BaseObject::Destroy(pause_screen, window, ren);
                 playing_when_pause = false;
-                //continue;
                 break;
             }
         }

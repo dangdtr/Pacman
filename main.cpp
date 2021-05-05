@@ -41,12 +41,12 @@ int main(int argc, char *args[])
 
 		Pacman *pacman = NULL;
 		pacman = new Pacman;
-		pacman->_LoadImg("pic/PacMan.bmp", g_screen);
+		pacman->_LoadImg("image/PacMan.bmp", g_screen);
 		pacman->setClips();
 
 		Ghost *ghost = NULL;
 		ghost = new Ghost;
-		ghost->_LoadImg("pic/Blinky.bmp", g_screen);
+		ghost->_LoadImg("image/Blinky.bmp", g_screen);
 		ghost->setClips();
 
 		std::vector<bool> flag_ghost_was_eaten(4);
@@ -58,10 +58,10 @@ int main(int argc, char *args[])
 			flag_ghost_was_eaten[i] = false;
 		}
 
-		ghost_list[0]->_LoadImg("pic/Blinky.bmp", g_screen);
-		ghost_list[1]->_LoadImg("pic/Inkey.bmp", g_screen);
-		ghost_list[2]->_LoadImg("pic/Pinky.bmp", g_screen);
-		ghost_list[3]->_LoadImg("pic/Clyde.bmp", g_screen);
+		ghost_list[0]->_LoadImg("image/Blinky.bmp", g_screen);
+		ghost_list[1]->_LoadImg("image/Inkey.bmp", g_screen);
+		ghost_list[2]->_LoadImg("image/Pinky.bmp", g_screen);
+		ghost_list[3]->_LoadImg("image/Clyde.bmp", g_screen);
 
 		for (int i = 0; i < 4; i++)
 			ghost_list[i]->setClips();
@@ -78,7 +78,7 @@ int main(int argc, char *args[])
 
 		Point *point;
 		point = new Point;
-		point->_LoadImg("pic/point.bmp", g_screen);
+		point->_LoadImg("image/point.bmp", g_screen);
 		point->setPosMap();
 		point->setClipTile();
 
@@ -110,7 +110,6 @@ int main(int argc, char *args[])
 					if (g_event.type == SDL_KEYDOWN && g_event.key.keysym.sym == SDLK_ESCAPE)
 					{
 						menu_game.Pause_game(g_screen, g_window);
-						//cerr << "menu pause" << endl;
 					}
 					pacman->HandleInputAction(g_event, g_screen);
 				}
@@ -250,17 +249,16 @@ int main(int argc, char *args[])
 
 			// do: Pacman eat weakGhost
 			if (pacman->getFlagDead() == false && pacman->getFlagEatBigPoint() == true && ghost->getFlagEatWeakGhost() == true && count_time < 50)
-			{ // quit == false
-
+			{ 
+				// quit == false
 				score_eat_point += 4;
 
-				// tim duong ve chinh giua
 				for (int i = 0; i < 4; i++)
 				{
 					if (flag_ghost_was_eaten[i] == true)
 					{
 						score_eat_ghost += 4;
-						cerr << "cong diem an ghost " << endl;
+						
 						ghost_list[i]->Action();
 						ghost_list[i]->setPos(TILE_SIZE * 9, TILE_SIZE * 9);
 						ghost_list[i]->setFlagWhenPacEatBig(false);
@@ -368,16 +366,14 @@ bool init()
 			{
 				success = false;
 			}
-			g_font = TTF_OpenFont("emulogic.ttf", 13);
+			g_font = TTF_OpenFont("font/emulogic.ttf", 13);
 			if (g_font == NULL)
 			{
 				success = true;
-				//cerr << "OK";
 			}
-			if (Mix_OpenAudio(/*22050*/ 44100, MIX_DEFAULT_FORMAT, 2, /*4096*/ 2048) == -1)
+			if (Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2,  2048) == -1)
 			{
 				success = false;
-				//g_begin = Mix_LoadWAV("sound/pacman_beginning.wav");
 			}
 		}
 	}
@@ -397,9 +393,6 @@ void close()
 	TTF_CloseFont(g_font);
 	g_font = NULL;
 
-	// Mix_FreeMusic(g_begin);
-	// g_begin = NULL;
-
 	Mix_Quit();
 	IMG_Quit();
 	SDL_Quit();
@@ -412,6 +405,5 @@ void waitUntilKeyPressed() // ok
 		if (SDL_WaitEvent(&e) != 0 &&
 			(e.type == SDL_KEYDOWN || e.type == SDL_QUIT))
 			return;
-		////SDL_Delay(100);
 	}
 }

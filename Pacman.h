@@ -16,7 +16,6 @@ public:
 
     void HandleInputAction(SDL_Event events, SDL_Renderer* screen);
     bool checkCollisionWith( std::vector<SDL_Rect>& a);
-    //bool checkCollisionWithPoint( std::vector<SDL_Rect>& a);// không cần thiết
     bool checkCollisionWithEachGhost(SDL_Rect a);
 
     bool _LoadImg(const std::string& path, SDL_Renderer* screen);
