@@ -26,7 +26,7 @@ Pacman::~Pacman()
 {
     x = NULL;
     y = NULL;
-    delete game_map;
+     game_map = NULL;
 }
 
 int Pacman::getX()
@@ -97,7 +97,7 @@ void Pacman::ShowHealth(SDL_Renderer *des){
         p_clip = &rightPacman[1];
         SDL_SetRenderDrawColor(des,0,0,0,0);
         renderTexture(p_object, des, TILE_SIZE/4 + TILE_SIZE/2*3 * i ,TILE_SIZE  * 19 + TILE_SIZE / 4 , PACMAN_SIZE, PACMAN_SIZE);
-        SDL_RenderPresent(des);
+        //SDL_RenderPresent(des);
     }
 }
 void Pacman::Show(SDL_Renderer *des, const int &index)

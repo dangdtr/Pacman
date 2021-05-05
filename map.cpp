@@ -4,16 +4,13 @@
 
 GameMap::GameMap()
 {
+    ;
 }
 GameMap::~GameMap()
 {
+    ;
 }
-TileMap::TileMap()
-{
-}
-TileMap::~TileMap()
-{
-}
+
 
 void GameMap::LoadMap(char* path)
 {
@@ -72,10 +69,23 @@ void GameMap::setClipTile()
     mCollision[34]= {TILE_SIZE * 15, TILE_SIZE * 16, TILE_SIZE * 2, TILE_SIZE};
     mCollision[35]= {TILE_SIZE, TILE_SIZE * 18, TILE_SIZE * 17, TILE_SIZE};
     mCollision[36]= {TILE_SIZE * 7, TILE_SIZE * 8, TILE_SIZE * 5, TILE_SIZE * 3};
+    mCollisionGHO.resize(41);
+    for (int i = 0; i < 36; i++){
+        mCollisionGHO[i] = mCollision[i];
+    }
+    mCollisionGHO[36]= {TILE_SIZE * 7, TILE_SIZE * 8, TILE_SIZE * 2, TILE_SIZE * 1};
+    mCollisionGHO[37]= {TILE_SIZE * 10, TILE_SIZE * 8, TILE_SIZE * 2, TILE_SIZE * 1};
+    mCollisionGHO[38]= {TILE_SIZE * 7, TILE_SIZE * 9, TILE_SIZE * 1, TILE_SIZE * 2};
+    mCollisionGHO[39]= {TILE_SIZE * 11, TILE_SIZE * 9, TILE_SIZE * 1, TILE_SIZE * 2};
+    mCollisionGHO[40]= {TILE_SIZE * 7, TILE_SIZE * 10, TILE_SIZE * 5, TILE_SIZE * 1};
 }
 
 
 std::vector<SDL_Rect>& GameMap::getColliders()
 {
     return mCollision;
+}
+std::vector<SDL_Rect>& GameMap::getCollidersGHO()
+{
+    return mCollisionGHO;
 }

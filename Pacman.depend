@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1619754040 source:c:\users\ddang\documents\ltnc\pacman\main.cpp
+1620183493 source:c:\users\ddang\documents\ltnc\pacman\main.cpp
 	<iostream>
 	"CommonFunction.h"
 	"BaseObject.h"
@@ -8,8 +8,9 @@
 	"map.h"
 	"point.h"
 	"menu_game.h"
+	"TextObject.h"
 
-1619597560 c:\users\ddang\documents\ltnc\pacman\commonfunction.h
+1620184841 c:\users\ddang\documents\ltnc\pacman\commonfunction.h
 	<windows.h>
 	<string>
 	<iostream>
@@ -18,6 +19,7 @@
 	<SDL_image.h>
 	<vector>
 	<SDL_ttf.h>
+	<SDL_mixer.h>
 
 1608572888 c:\users\ddang\documents\ltnc\pacman\sdl\sdl2-2.0.14\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -403,13 +405,13 @@
 	"map.h"
 	"point.h"
 
-1619595521 c:\users\ddang\documents\ltnc\pacman\ghost.h
+1620183141 c:\users\ddang\documents\ltnc\pacman\ghost.h
 	"CommonFunction.h"
 	"BaseObject.h"
 	<ctime>
 	<cstdlib>
 
-1619287882 c:\users\ddang\documents\ltnc\pacman\map.h
+1620147375 c:\users\ddang\documents\ltnc\pacman\map.h
 	"CommonFunction.h"
 	"BaseObject.h"
 
@@ -425,10 +427,10 @@
 1619595794 source:c:\users\ddang\documents\ltnc\pacman\ghost.cpp
 	"ghost.h"
 
-1619589849 source:c:\users\ddang\documents\ltnc\pacman\map.cpp
+1620147764 source:c:\users\ddang\documents\ltnc\pacman\map.cpp
 	"map.h"
 
-1619609458 source:c:\users\ddang\documents\ltnc\pacman\pacman.cpp
+1620183035 source:c:\users\ddang\documents\ltnc\pacman\pacman.cpp
 	"Pacman.h"
 
 1619609721 source:c:\users\ddang\documents\ltnc\pacman\baseobject.cpp
@@ -808,19 +810,19 @@
 	"begin_code.h"
 	"close_code.h"
 
-1619595577 c:\users\ddang\documents\ltnc\pacman\point.h
+1620184954 c:\users\ddang\documents\ltnc\pacman\point.h
 	"CommonFunction.h"
 	"BaseObject.h"
 	"map.h"
 
-1619605639 source:c:\users\ddang\documents\ltnc\pacman\point.cpp
+1620185428 source:c:\users\ddang\documents\ltnc\pacman\point.cpp
 	"point.h"
 
 1619598858 c:\users\ddang\documents\ltnc\pacman\menu_game.h
 	"CommonFunction.h"
 	"BaseObject.h"
 
-1619752904 source:c:\users\ddang\documents\ltnc\pacman\menu_game.cpp
+1620152766 source:c:\users\ddang\documents\ltnc\pacman\menu_game.cpp
 	"Menu_game.h"
 
 1619753981 c:\users\ddang\documents\ltnc\pacman\game.h
@@ -835,4 +837,23 @@
 
 1619753985 source:c:\users\ddang\documents\ltnc\pacman\game.cpp
 	"game.h"
+
+1620149196 c:\users\ddang\documents\ltnc\pacman\textobject.h
+	"BaseObject.h"
+	<string>
+	<SDL_ttf.h>
+	"CommonFunction.h"
+	<fstream>
+
+1620148334 source:c:\users\ddang\documents\ltnc\pacman\textobject.cpp
+	"TextObject.h"
+
+1540997992 c:\users\ddang\documents\ltnc\pacman\sdl\sdl2_mixer-2.0.4\i686-w64-mingw32\include\sdl2\sdl_mixer.h
+	"SDL_stdinc.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
 

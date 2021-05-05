@@ -4,12 +4,7 @@
 #include "BaseObject.h"
 
 
-class TileMap : public BaseObject{
-public:
-    TileMap();
-    ~TileMap();
 
-};
 
 class GameMap : public BaseObject
 {
@@ -19,12 +14,17 @@ public:
     virtual void LoadMap(char* path);
     
     void setClipTile();
+    
 
     std::vector<SDL_Rect>& getColliders();
+    std::vector<SDL_Rect>& getCollidersGHO();
+
 
 protected:
     Map game_map;
     std::vector<SDL_Rect> mCollision;
+    std::vector<SDL_Rect> mCollisionGHO;
+
 
 };
 

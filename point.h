@@ -36,7 +36,9 @@ protected:
 
     int sPoint;
     std::vector<SDL_Rect> mCollision;
+    int frame = 0;
 
+    Mix_Chunk* g_chomp = Mix_LoadWAV("sound/pacman_chomp.wav");
 
 };
 

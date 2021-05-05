@@ -28,12 +28,12 @@ void MenuGame::Menu_game(SDL_Renderer *ren, SDL_Window *window)
     while (playing)
     {
 
-        SDL_Delay(100);
+        SDL_Delay(1);
 
         SDL_RenderPresent(ren);
 
         if (SDL_WaitEvent(&m_event) == 0){
-            SDL_RenderPresent(ren);
+            //SDL_RenderPresent(ren);
             continue;
         }
 
@@ -55,19 +55,19 @@ void MenuGame::Menu_game(SDL_Renderer *ren, SDL_Window *window)
                     //continue;
                     break;
                 case SDLK_h:
-                    SDL_RenderClear(ren);
+                    //SDL_RenderClear(ren);
                     SDL_SetRenderDrawColor(ren,0,0,0,0);
 
                     renderTexture(help_screen, ren, 0, 0);
-                    //continue;
-                    break;
+                    continue;
+                    //break;
                 case SDLK_m:
-                    SDL_RenderClear(ren);
+                    //SDL_RenderClear(ren);
                     //SDL_SetRenderDrawColor(ren,0,0,0,0);
                     renderTexture(menu_screen, ren, 0, 0);
-                    SDL_RenderPresent(ren);
-                    //continue;
-                    break;
+                    //SDL_RenderPresent(ren);
+                    continue;
+                    //break;
             }
         }
     }

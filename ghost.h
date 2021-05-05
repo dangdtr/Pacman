@@ -55,7 +55,7 @@ public:
     SDL_Rect getRect();
 
 protected:
-    const int STEP = 14;
+    const int STEP = 14*2;
     int Ghost_x_pos = 252; //x9
     int Ghost_y_pos = 196; //x7
     int stepX = 0;

@@ -9,7 +9,7 @@
 #include <SDL_image.h>
 #include <vector>
 #include <SDL_ttf.h>
-//#include <SDL_mixer.h>
+#include <SDL_mixer.h>
 //#include <SDL_ttf.h>
 
 using namespace std;
