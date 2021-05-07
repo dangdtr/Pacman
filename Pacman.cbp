@@ -12,23 +12,21 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-m32" />
 					<Add option="-g" />
-					<Add directory="SDL/SDL2-2.0.14/i686-w64-mingw32/include/SDL2" />
-					<Add directory="SDL/SDL2_image-2.0.5/include" />
-					<Add directory="SDL/SDL2_ttf-2.0.15/i686-w64-mingw32/include/SDL2" />
-					<Add directory="SDL/SDL2_mixer-2.0.4/i686-w64-mingw32/include/SDL2" />
+					<Add directory="SDL/SDL2_mixer-2.0.4/x86_64-w64-mingw32/include/SDL2" />
+					<Add directory="SDL/SDL2_ttf-2.0.15/x86_64-w64-mingw32/include/SDL2" />
+					<Add directory="SDL/SDL2_image-2.0.5/x86_64-w64-mingw32/include/SDL2" />
+					<Add directory="SDL/SDL2-2.0.14/x86_64-w64-mingw32/include/SDL2" />
 				</Compiler>
 				<Linker>
-					<Add option="-m32" />
 					<Add option="-lmingw32 -lSDL2main -lSDL2" />
 					<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image" />
 					<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_ttf" />
 					<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer" />
-					<Add directory="SDL/SDL2-2.0.14/i686-w64-mingw32/lib" />
-					<Add directory="SDL/SDL2_image-2.0.5/lib/x86" />
-					<Add directory="SDL/SDL2_ttf-2.0.15/i686-w64-mingw32/lib" />
-					<Add directory="SDL/SDL2_mixer-2.0.4/i686-w64-mingw32/lib" />
+					<Add directory="SDL/SDL2_image-2.0.5/x86_64-w64-mingw32/lib" />
+					<Add directory="SDL/SDL2_ttf-2.0.15/x86_64-w64-mingw32/lib" />
+					<Add directory="SDL/SDL2-2.0.14/x86_64-w64-mingw32/lib" />
+					<Add directory="SDL/SDL2_mixer-2.0.4/x86_64-w64-mingw32/lib" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -38,45 +36,42 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add option="-m32" />
-					<Add directory="SDL/SDL2-2.0.14/i686-w64-mingw32/include/SDL2" />
-					<Add directory="SDL/SDL2_image-2.0.5/include" />
-					<Add directory="SDL/SDL2_ttf-2.0.15/i686-w64-mingw32/include/SDL2" />
-					<Add directory="SDL/SDL2_mixer-2.0.4/i686-w64-mingw32/include/SDL2" />
+					<Add option="-g" />
+					<Add directory="SDL/SDL2_mixer-2.0.4/x86_64-w64-mingw32/include/SDL2" />
+					<Add directory="SDL/SDL2_ttf-2.0.15/x86_64-w64-mingw32/include/SDL2" />
+					<Add directory="SDL/SDL2_image-2.0.5/x86_64-w64-mingw32/include/SDL2" />
+					<Add directory="SDL/SDL2-2.0.14/x86_64-w64-mingw32/include/SDL2" />
 				</Compiler>
 				<Linker>
-					<Add option="-s" />
-					<Add option="-m32" />
 					<Add option="-lmingw32 -lSDL2main -lSDL2" />
 					<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image" />
 					<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_ttf" />
 					<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer" />
-					<Add directory="SDL/SDL2-2.0.14/i686-w64-mingw32/lib" />
-					<Add directory="SDL/SDL2_image-2.0.5/lib/x86" />
-					<Add directory="SDL/SDL2_ttf-2.0.15/i686-w64-mingw32/lib" />
-					<Add directory="SDL/SDL2_mixer-2.0.4/i686-w64-mingw32/lib" />
+					<Add directory="SDL/SDL2_image-2.0.5/x86_64-w64-mingw32/lib" />
+					<Add directory="SDL/SDL2_ttf-2.0.15/x86_64-w64-mingw32/lib" />
+					<Add directory="SDL/SDL2-2.0.14/x86_64-w64-mingw32/lib" />
+					<Add directory="SDL/SDL2_mixer-2.0.4/x86_64-w64-mingw32/lib" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add option="-m32" />
+			<Add option="-g" />
 			<Add option="-fexceptions" />
-			<Add directory="SDL/SDL2-2.0.14/i686-w64-mingw32/include/SDL2" />
-			<Add directory="SDL/SDL2_image-2.0.5/include" />
-			<Add directory="SDL/SDL2_ttf-2.0.15/i686-w64-mingw32/include/SDL2" />
-			<Add directory="SDL/SDL2_mixer-2.0.4/i686-w64-mingw32/include/SDL2" />
+			<Add directory="SDL/SDL2-2.0.14/x86_64-w64-mingw32/include/SDL2" />
+			<Add directory="SDL/SDL2_image-2.0.5/x86_64-w64-mingw32/include/SDL2" />
+			<Add directory="SDL/SDL2_ttf-2.0.15/x86_64-w64-mingw32/include/SDL2" />
+			<Add directory="SDL/SDL2_mixer-2.0.4/x86_64-w64-mingw32/include/SDL2" />
 		</Compiler>
 		<Linker>
-			<Add option="-m32" />
 			<Add option="-lmingw32 -lSDL2main -lSDL2" />
 			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image" />
 			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_ttf" />
 			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer" />
-			<Add directory="SDL/SDL2_image-2.0.5/lib/x86" />
-			<Add directory="SDL/SDL2_ttf-2.0.15/i686-w64-mingw32/lib" />
-			<Add directory="SDL/SDL2-2.0.14/i686-w64-mingw32/lib" />
-			<Add directory="SDL/SDL2_mixer-2.0.4/i686-w64-mingw32/lib" />
+			<Add directory="SDL/SDL2_image-2.0.5/x86_64-w64-mingw32/lib" />
+			<Add directory="SDL/SDL2_ttf-2.0.15/x86_64-w64-mingw32/lib" />
+			<Add directory="SDL/SDL2-2.0.14/x86_64-w64-mingw32/lib" />
+			<Add directory="SDL/SDL2_mixer-2.0.4/x86_64-w64-mingw32/lib" />
 		</Linker>
 		<Unit filename="BaseObject.cpp" />
 		<Unit filename="BaseObject.h" />
@@ -88,9 +83,11 @@
 		<Unit filename="TextObject.h" />
 		<Unit filename="ghost.cpp" />
 		<Unit filename="ghost.h" />
+		<Unit filename="high_score.txt" />
 		<Unit filename="main.cpp" />
 		<Unit filename="map.cpp" />
 		<Unit filename="map.h" />
+		<Unit filename="map.txt" />
 		<Unit filename="menu_game.cpp" />
 		<Unit filename="menu_game.h" />
 		<Unit filename="point.cpp" />
