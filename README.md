@@ -10,16 +10,5 @@ C++ & SDL2 Pacman Clone, project of Advanced Programming (INT2215)
   * Option 1: Open *.cbp with CodeBlock, then click *Run* or press *F9*
   * Option 2: Click *.exe to run
 
-### Structure
-- BaseObject, CommonFunction: include basic funtion to load, render.
-- Main: includes game loop, logic game(set+get status flag of pacman & ghost, collision), draws objects to screen.
-- Pacman: includes handle input from keyboard to move, checks collision with ghost and wall, set animations
-- Ghost: same as Pacman except them randomly move
-- Map: includes all rect of wall(to check collison with ghost, pacman).
-- Point: has maze of foods in order to Pacman eat them
-(so on)
-
-#### Demonstrate
+### Demonstrate
 - [Youtube]()
-
-<img src="https://imgur.com/QxsvuvW">
