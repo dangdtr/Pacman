@@ -21,4 +21,5 @@ C++ & SDL2 Pacman Clone, project of Advanced Programming (INT2215)
 
 #### Demonstrate
 - [Youtube]()
-- <img src="https://imgur.com/ODaWWGQ">
+
+<img src="https://imgur.com/QxsvuvW">
