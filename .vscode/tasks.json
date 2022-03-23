@@ -1,0 +1,55 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "SDL2",
+            "command": "C:\\Program Files\\CodeBlocks\\MinGW\\bin\\g++.exe",
+            "args": [
+                "-g",
+                "*.cpp",
+                "-o",
+                "build\\game.exe",
+                "-I${workspaceFolder}/SDL/SDL2-2.0.14/x86_64-w64-mingw32/include/SDL2",
+                "-L${workspaceFolder}/SDL/SDL2-2.0.14/x86_64-w64-mingw32/lib",
+                "-lmingw32",
+                "-lSDL2main",
+                "-lSDL2",
+
+                "-I${workspaceFolder}/SDL/SDL2_image-2.0.5/x86_64-w64-mingw32/include/SDL2",
+                "-L${workspaceFolder}/SDL/SDL2_image-2.0.5/x86_64-w64-mingw32/lib",
+                "-lmingw32",
+                "-lSDL2main",
+                "-lSDL2",
+                "-lSDL2_image",
+
+                "-I${workspaceFolder}/SDL/SDL2_ttf-2.0.15/x86_64-w64-mingw32/include/SDL2",
+                "-L${workspaceFolder}/SDL/SDL2_ttf-2.0.15/x86_64-w64-mingw32/lib",
+                "-lmingw32",
+                "-lSDL2main",
+                "-lSDL2",
+                "-lSDL2_ttf",
+
+                "-I${workspaceFolder}/SDL/SDL2_mixer-2.0.4/x86_64-w64-mingw32/include/SDL2",
+                "-L${workspaceFolder}/SDL/SDL2_mixer-2.0.4/x86_64-w64-mingw32/lib",
+                "-lmingw32",
+                "-lSDL2main",
+                "-lSDL2",
+                "-lSDL2_mixer",
+
+                "-mwindows"
+
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
